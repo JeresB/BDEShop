@@ -36,19 +36,19 @@ class BDD_FACTURES {
     return $resultat;
   }
 
-  public function add($item, $mail, $tel, $complement) {
+  public function add($mail, $tel, $complement, $contenu) {
     error_log("ADD FACTURE");
 
-    $query = "INSERT INTO factures (mail, tel, complement, id_items) VALUES ($mail, $tel, $complement, $item)";
-    error_log($query);
+    //$query = "INSERT INTO factures (mail, tel, complement, contenu) VALUES ($mail, $tel, $complement, $contenu)";
+    //error_log($query);
 
-    $requete = $this->database->prepare("INSERT INTO factures (mail, tel, complement, id_items)
-                                         VALUES (:mail, :tel, :complement, :item)");
+    $requete = $this->database->prepare("INSERT INTO factures (mail, tel, complement, contenu)
+                                         VALUES (:mail, :tel, :complement, :contenu)");
 
     $requete->bindParam(':mail', $mail, PDO::PARAM_STR);
     $requete->bindParam(':tel', $tel, PDO::PARAM_STR);
     $requete->bindParam(':complement', $complement, PDO::PARAM_STR);
-    $requete->bindParam(':item', $item, PDO::PARAM_INT);
+    $requete->bindParam(':contenu', json_encode($contenu));
 
     $resultat = $requete->execute();
 

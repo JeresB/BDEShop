@@ -67,7 +67,7 @@ function extractEmails (text) {
       $.post(this.baseUrl + 'api/request/do.json',
         this.data,
         function (data) {
-          if (data.error === 0) {
+          if (data.error == 0) {
             document.location = data.mobile_url
           } else {
             console.log(data)
@@ -85,8 +85,6 @@ function extractEmails (text) {
 
 			lydiaProcess.emails_isen.push(extractEmails(mails))
 			lydiaProcess.emails_isen = lydiaProcess.emails_isen[0]
-		//	console.log(JSON.stringify(lydiaProcess.emails_isen))
-
 		})
 
 		for (var i = 0; i < lydiaProcess.configKey.length; i++) {
@@ -107,22 +105,18 @@ function extractEmails (text) {
 
     $(this).click(function () {
 
-
-
-
-
 			console.log(JSON.stringify(lydiaProcess.emails_isen))
 
       var mail = $('#mail').val() + '@isen-ouest.yncrea.fr'
       var tel = $('#tel').val()
-      var prix = $('#prix').val()
-      var message = $('#message').val()
 			var complement = $.trim($("#complement").val());
 
       var mail_valide = false;
       var tel_valide = false;
+
       $("#list_error").html('');
       $("#div_error_form").hide();
+
       console.log("payer click")
 			console.log(complement)
 
@@ -148,19 +142,14 @@ function extractEmails (text) {
         $.ajax({
           type: 'POST',
           url: 'admin/controleur/traitement_facture.php',
-          data: { id: $('#id').val(), mail: mail, tel: tel, complement: complement},
+          data: {mail: mail, tel: tel, complement: complement, contenu: bag},
           success: function(data){
-            console.log("success save facture");
+						lydiaProcess.data.recipient = '+33' + tel
+						lydiaProcess.data.amount = prix_total
+						lydiaProcess.sendRequest()
           }
         });
-
-				lydiaProcess.recipient = '+33' + tel
-				lydiaProcess.amount = prix
-				lydiaProcess.message = message
-				lydiaProcess.sendRequest()
-
 			}
-
     })
   }
 }(jQuery))

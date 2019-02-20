@@ -1,7 +1,7 @@
 <?php
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 
-require_once("$root/admin/controleur/buy_item.php");
+//require_once("$root/admin/controleur/buy_item.php");
 ?>
 
 <!doctype html>
@@ -13,33 +13,12 @@ require_once("$root/admin/controleur/buy_item.php");
   <body>
 
     <!-- Valeur récupérées par le javascript plus tard -->
-    <input id="prix" type="hidden" name="prix" value="<?= $item['prix'] ?>">
-    <input id="id" type="hidden" name="id" value="<?= $item['id'] ?>">
-    <input id="message" type="hidden" name="message" value="<?= $item['nom_item'] ?>">
+    <input id="prix" type="hidden" name="prix" value="">
+    <input id="id" type="hidden" name="id" value="">
+    <input id="message" type="hidden" name="message" value="">
 
     <div class="ui container">
-      <div class="ui segment">
-        <div class="ui items centered_block">
-          <div class="item">
-            <a class="ui tiny image" href="/images/<?= $item['photo'] ?>" target="_blank">
-              <img src="/images/<?= $item['photo'] ?>">
-            </a>
-            <div class="content">
-              <div class="header"><?= $item['nom_item'] ?></div>
-              <div class="meta">
-                <?= $item['categorie'] ?>
-              </div>
-              <div class="description">
-                <p><?= $item['description'] ?></p>
-              </div>
-              <div class="extra">
-                <span class="price">Prix : <?= $item['prix'] ?> €</span>
-                <span class="stock">Stock : <?= $item['stock'] ?></span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <div id="bag"></div>
       <div class="ui segment">
         <form class="ui form centered_block">
           <div id="field_mail" class="field">
@@ -72,15 +51,23 @@ require_once("$root/admin/controleur/buy_item.php");
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="semantic/semantic.min.js"></script>
+    <script type="text/javascript" src="semantic/Semantic-UI-Alert.js"></script>
+    <script type="text/javascript" src="js/bag.js"></script>
     <script type="text/javascript" src="js/LYDIASDK.js"></script>
     <script type="text/javascript">
       $(document).ready(function() {
+        var bag = '';
+        var prix_total = 0;
+        getBag();
+
         $("#payer").payWithLYDIA({
           amount: 0, // amount in €
-          vendor_token: '56ebe1831f92d126022942',
+          vendor_token: '5c1a1463e1bde447906484',
           recipient: '', //cellphone or email of your client. Leave it like this for your test
-          message : "", //object of the payment
-
+          message : "Achat BDE ISEN Shop", //object of the payment
+          env: "test",
+          currency: 'EUR',
+          type: 'phone',
           // The client will be redirect to this URL after the payment
           browser_success_url : "bdeshop/success.php",
           // This URL will be called by our server after the payment so you can update the order on your database

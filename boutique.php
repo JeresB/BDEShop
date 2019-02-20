@@ -8,6 +8,7 @@ require_once("$root/admin/controleur/categories.php");
 <html lang="fr">
 
   <?php require_once("$root/templates/head.php"); ?>
+  <link rel="stylesheet" type="text/css" href="semantic/Semantic-UI-Alert.css">
   <?php require_once("$root/templates/nav.php"); ?>
 
   <body>
@@ -67,10 +68,13 @@ require_once("$root/admin/controleur/categories.php");
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="semantic/semantic.min.js"></script>
     <script type="text/javascript" src="js/boutique.js"></script>
+    <script type="text/javascript" src="semantic/Semantic-UI-Alert.js"></script>
+    <script type="text/javascript" src="js/bag.js"></script>
     <script type="text/javascript">
       $( document ).ready(function() {
         var categorie = 'all';
         var tri = 'nom';
+        var prix_total = 0;
 
         selectParametre();
         addBag();
@@ -100,13 +104,13 @@ require_once("$root/admin/controleur/categories.php");
                 contenu += '<div class="content">Quantité : <button class="ui red circular icon button" data="' + i + '" type="moins"><i class="minus icon"></i></button> <span id="quantite' + i + '" class="' + response[i].id + 'quantite">1</span> <button class="ui green circular icon button" data="' + i + '" type="plus"><i class="plus icon"></i></button></div>';
 
                 if (response[i].parametres !== null) {
-                  
+
                   var parametres = JSON.parse(response[i].parametres)
                   console.log("creation item");
                   console.log(parametres);
 
                   $.each(parametres, function(j, parametre) {
-                    contenu += '<div class="content parametres_content"><div class="header">' + parametre.nom + '</div>';
+                    contenu += '<div class="content parametres_content ' + response[i].id + '"><div class="header">' + parametre.nom + '</div>';
 
                     $.each(parametre.options, function(k, option) {
                       contenu += '<button class="ui button parametre_button ' + response[i].id + parametre.nom + ' ' + response[i].id + 'parametre" data="' + response[i].id + parametre.nom + '" param="' + parametre.nom + '" value="' + option + '">' + option + '</button>';
