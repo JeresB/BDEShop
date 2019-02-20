@@ -1,0 +1,23 @@
+body {
+  background-image: url('/images/white_background.png');
+  background-repeat: repeat;
+}
+
+img {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.trashbutton {
+  cursor: pointer;
+}
+
+.centered_block {
+  max-width: 760px !important;
+  margin-right: auto !important;
+  margin-left: auto !important;
+}
+
+.list_factures {
+  min-width: 60%!important;
+}
