@@ -2,9 +2,12 @@
 
 session_start();
 
-error_log(print_r($_POST, true));
+error_log("ADD BAG");
+error_log(print_r($_GET, true));
 
-$_SESSION["shopping_list"][] = $_POST;
+if (isset($_GET) && !empty($_GET)) {
+  $_SESSION["shopping_list"][] = $_GET;
+}
 
 echo json_encode($_SESSION["shopping_list"]);
 

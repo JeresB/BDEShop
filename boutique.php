@@ -75,6 +75,7 @@ require_once("$root/admin/controleur/categories.php");
         selectParametre();
         addBag();
         supprBag();
+        getBag();
 
         function getItems(categorie, tri) {
           $.ajax({
@@ -98,8 +99,10 @@ require_once("$root/admin/controleur/categories.php");
                 contenu += '<div class="content">' + ((response[i].stock > 0) ? 'Stock restant : ' + response[i].stock : '<span class="ui red header">Stock épuisée</span>') + '</div>';
                 contenu += '<div class="content">Quantité : <button class="ui red circular icon button" data="' + i + '" type="moins"><i class="minus icon"></i></button> <span id="quantite' + i + '" class="' + response[i].id + 'quantite">1</span> <button class="ui green circular icon button" data="' + i + '" type="plus"><i class="plus icon"></i></button></div>';
 
-                if (response[i].parametres !== 'null') {
+                if (response[i].parametres !== null) {
+                  
                   var parametres = JSON.parse(response[i].parametres)
+                  console.log("creation item");
                   console.log(parametres);
 
                   $.each(parametres, function(j, parametre) {
