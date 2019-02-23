@@ -27,11 +27,23 @@ class BDD_FACTURES {
   }
 
   public function list() {
-    $requete = $this->database->prepare("SELECT factures.id, mail, tel, status, complement, date_creation, nom, prix FROM factures, items WHERE factures.id_items = items.id");
+    $requete = $this->database->prepare("SELECT id, mail, tel, status, complement, date_creation FROM factures");
 
     $requete->execute();
 
     $resultat = $requete->fetchAll();
+
+    return $resultat;
+  }
+
+  public function get($id) {
+    $requete = $this->database->prepare("SELECT id, mail, tel, status, complement, date_creation, contenu FROM factures WHERE id = :id");
+
+    $requete->bindParam(':id', $id, PDO::PARAM_INT);
+
+    $requete->execute();
+
+    $resultat = $requete->fetch();
 
     return $resultat;
   }

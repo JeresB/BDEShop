@@ -42,6 +42,9 @@ require_once("$root/admin/controleur/factures.php");
             <a id="link_events" class="item link_admin_menu" data="events">
               Evénements
             </a>
+            <a href="controleur/deconnexion.php" class="item redmenuitem">
+              Déconnexion
+            </a>
           </div>
         </div>
         <div class="twelve wide computer sixteen wide mobile column">
@@ -123,8 +126,6 @@ require_once("$root/admin/controleur/factures.php");
                       <th>Commande n°</th>
                       <th>Client</th>
                       <th>Status du payement</th>
-                      <th>Item</th>
-                      <th>Prix</th>
                       <th>Complement</th>
                       <th>Date</th>
                     </tr>
@@ -137,11 +138,9 @@ require_once("$root/admin/controleur/factures.php");
                         else $status = 'negative';
                       ?>
                       <tr class="<?= $status; ?>">
-                        <td><?= $facture['id']; ?></td>
+                        <td><a href="facture.php?id=<?= $facture['id']; ?>"><?= $facture['id']; ?></a></td>
                         <td><?= $facture['mail']; ?></td>
                         <td><?= $facture['status']; ?></td>
-                        <td><?= $facture['nom']; ?></td>
-                        <td><?= $facture['prix']; ?></td>
                         <td><?= $facture['complement']; ?></td>
                         <td><?= $facture['date_creation']; ?></td>
                       </tr>
@@ -152,8 +151,6 @@ require_once("$root/admin/controleur/factures.php");
                       <th>Commande n°</th>
                       <th>Client</th>
                       <th>Status du payement</th>
-                      <th>Item</th>
-                      <th>Prix</th>
                       <th>Complement</th>
                       <th>Date</th>
                     </tr>
