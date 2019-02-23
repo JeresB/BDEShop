@@ -101,7 +101,7 @@ require_once("$root/admin/controleur/categories.php");
                 contenu += '<div class="content"><div class="header ' + response[i].id + 'nom' + '">' + response[i].nom_item + '</div><div class="meta"><span>' + response[i].categorie + '</span></div>';
                 contenu += '<div class="description">' + response[i].description + '</div></div>';
                 contenu += '<div class="content">' + ((response[i].stock > 0) ? 'Stock restant : ' + response[i].stock : '<span class="ui red header">Stock épuisée</span>') + '</div>';
-                contenu += '<div class="content">Quantité : <button class="ui red circular icon button" data="' + i + '" type="moins"><i class="minus icon"></i></button> <span id="quantite' + i + '" class="' + response[i].id + 'quantite">1</span> <button class="ui green circular icon button" data="' + i + '" type="plus"><i class="plus icon"></i></button></div>';
+                contenu += '<div class="content">Quantité : <button class="ui red circular icon button smallerbutton" data="' + i + '" type="moins"><i class="minus icon"></i></button> <span id="quantite' + i + '" class="' + response[i].id + 'quantite">1</span> <button class="ui green circular icon button smallerbutton" data="' + i + '" type="plus"><i class="plus icon"></i></button></div>';
 
                 if (response[i].parametres !== null) {
 
@@ -113,7 +113,7 @@ require_once("$root/admin/controleur/categories.php");
                     contenu += '<div class="content parametres_content ' + response[i].id + '"><div class="header">' + parametre.nom + '</div>';
 
                     $.each(parametre.options, function(k, option) {
-                      contenu += '<button class="ui button parametre_button ' + response[i].id + parametre.nom + ' ' + response[i].id + 'parametre" data="' + response[i].id + parametre.nom + '" param="' + parametre.nom + '" value="' + option + '">' + option + '</button>';
+                      contenu += '<button class="ui button smallerbutton parametre_button ' + response[i].id + parametre.nom + ' ' + response[i].id + 'parametre" data="' + response[i].id + parametre.nom + '" param="' + parametre.nom + '" value="' + option + '">' + option + '</button>';
                     });
 
                     contenu += '</div>';

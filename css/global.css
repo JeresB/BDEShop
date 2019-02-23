@@ -26,3 +26,7 @@ img {
   background-color: #db2828!important;
   color: white!important;
 }
+
+.smallerbutton {
+  font-size: 0.8rem!important;
+}
