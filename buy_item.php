@@ -51,7 +51,7 @@ $root = realpath($_SERVER["DOCUMENT_ROOT"]);
               </li>
             </ul>
           </div>
-          <img  id="payer" src="/images/paymentbutton.png" style="max-width: 100%!important;">
+          <img  id="payer" src="/images/paymentbutton.png" style="max-width: 100%!important; cursor: pointer;">
         </form>
       </div>
     </div>

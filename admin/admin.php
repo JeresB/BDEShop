@@ -119,6 +119,9 @@ require_once("$root/admin/controleur/factures.php");
           </div>
           <div id="factures" class="ui grid main_content" style="display: none;">
             <div class="ui center aligned segment list_factures">
+              <a class="ui fluid basic button" href="/admin/controleur/exportFactures.php">
+                Exporter les factures au format CSV
+              </a>
               <div class="ui relaxed divided list">
                 <table id="factures_table" class="ui selectable celled table" style="width:100%">
                   <thead>

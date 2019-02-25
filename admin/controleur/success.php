@@ -1,5 +1,9 @@
 <?php
 
+session_start()
+
+unset($_SESSION['shopping_list']);
+
 error_log("SUCCESS PAYEMENT");
 error_log(print_r($_POST, true));
 

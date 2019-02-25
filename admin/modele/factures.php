@@ -27,7 +27,7 @@ class BDD_FACTURES {
   }
 
   public function list() {
-    $requete = $this->database->prepare("SELECT id, mail, tel, status, complement, date_creation FROM factures");
+    $requete = $this->database->prepare("SELECT id, mail, tel, status, complement, date_creation, contenu FROM factures ORDER BY id");
 
     $requete->execute();
 
