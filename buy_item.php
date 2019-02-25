@@ -46,9 +46,9 @@ $root = realpath($_SERVER["DOCUMENT_ROOT"]);
           <div id="div_error_form" class="ui error message"><ul id="list_error" class="list"></ul></div>
           <div class="ui message">
             <ul class="list">
-              <ul>
+              <li>
                 Pour payer par carte bancaire, cliquez sur le bouton Lydia ci-dessous.
-              </ul>
+              </li>
             </ul>
           </div>
           <img  id="payer" src="/images/paymentbutton.png" style="max-width: 100%!important;">
