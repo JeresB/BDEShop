@@ -23,13 +23,13 @@ if (isset($_POST) && !empty($_POST)) {
       if (move_uploaded_file($photo_tmp_name, $uploadfolder.$photo_name)) {
         $insert_with_picture = true;
       } else {
-        echo 'ERROR WHEN UPLOADING FILE';
+        error_log('ERROR WHEN UPLOADING FILE');
       }
     } else {
-      echo 'EXTENSION NOT VALIDATE';
+      error_log('EXTENSION NOT VALIDATE');
     }
   } else {
-    echo 'FILES DOESN\'T EXIST';
+    error_log('FILES DOESN\'T EXIST');
   }
 
   $parametre_json = json_encode($_POST['parametres']);
