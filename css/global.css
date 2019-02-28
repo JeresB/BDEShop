@@ -29,4 +29,6 @@ img {
 
 .smallerbutton {
   font-size: 0.8rem!important;
+  margin-top: 3px!important;
+  margin-bottom: 3px!important;
 }

@@ -8,7 +8,7 @@
 
   <body>
     <div class="ui container">
-      <img class="ui image" src="https://via.placeholder.com/600.png?text=BDE+Cosmunity+Image">
+      <img class="ui image" src="images/stickerv2.png">
     </div>
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
