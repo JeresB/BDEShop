@@ -139,16 +139,19 @@ function extractEmails (text) {
 			}
 
       if (mail_valide && tel_valide) {
-        $.ajax({
-          type: 'POST',
+				request = $.ajax({
+					type: 'POST',
           url: 'admin/controleur/traitement_facture.php',
-          data: {mail: mail, tel: tel, complement: complement, contenu: bag},
-          success: function(data){
-						lydiaProcess.data.recipient = '+33' + tel
-						lydiaProcess.data.amount = prix_total
-						lydiaProcess.sendRequest()
-          }
-        });
+          data: {mail: mail, tel: tel, complement: complement, contenu: bag}
+				});
+
+				request.done(function (order_ref, textStatus, jqXHR){
+					//console.log("Requete ajax to get order ref done : " + order_ref);
+					lydiaProcess.data.recipient = '+33' + tel
+					lydiaProcess.data.amount = prix_total
+					lydiaProcess.data.order_ref = order_ref
+					lydiaProcess.sendRequest()
+				});
 			}
     })
   }

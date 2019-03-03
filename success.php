@@ -1,7 +1,7 @@
 <?php
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 
-require_once("$root/admin/controleur/success.php");
+//require_once("$root/admin/controleur/success.php");
 ?>
 
 <!doctype html>
