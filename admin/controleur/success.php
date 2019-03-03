@@ -12,10 +12,10 @@ error_log(print_r($_POST, true));
 error_log(print_r($_SESSION, true));
 
 $order_ref = $_POST['order_ref'];
-$order_ref = 20;
+//$order_ref = 20;
 
 
-//if (isset($order_ref) && $order_ref!= null && $order_ref != '') {
+if (isset($order_ref) && $order_ref!= null && $order_ref != '') {
   $gestion_bdd = new BDD_FACTURES();
   $gestion_bdd->updateStatus($order_ref, 'Payé');
 
@@ -58,7 +58,7 @@ $order_ref = 20;
     //echo "Message sent!";
     $gestion_bdd->updateStatus($order_ref, 'Payé & mail envoyé');
   }
-//}
+}
 
 
 ?>
