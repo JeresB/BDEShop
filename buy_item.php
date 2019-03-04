@@ -76,9 +76,9 @@ $root = realpath($_SERVER["DOCUMENT_ROOT"]);
           currency: 'EUR',
           type: 'phone',
           // The client will be redirect to this URL after the payment
-          browser_success_url : "http://bdeshop/success.php",
+          browser_success_url : "http://bde.digital-design.ovh/success.php",
           // This URL will be called by our server after the payment so you can update the order on your database
-          confirm_url : "http://bdeshop/admin/controleur/success.php"
+          confirm_url : "http://bde.digital-design.ovh/admin/controleur/success.php"
         });
       });
     </script>
