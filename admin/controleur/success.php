@@ -1,4 +1,6 @@
 <?php
+header("Access-Control-Allow-Origin: *");
+
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 
 require_once("$root/admin/modele/factures.php");
