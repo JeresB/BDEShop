@@ -21,7 +21,7 @@ $root = realpath($_SERVER["DOCUMENT_ROOT"]);
           <p>Vous allez recevoir un email de confiramtion de votre commande.</p>
         </div>
       </div>
-      <img class="ui image" src="https://via.placeholder.com/600.png?text=BDE+Cosmunity+Image">
+      <img class="ui image" src="images/stickerv2.png" style="max-height: 80vh!important;">
     </div>
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
