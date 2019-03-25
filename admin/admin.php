@@ -137,7 +137,7 @@ require_once("$root/admin/controleur/factures.php");
                     <?php foreach ($factures as $facture): ?>
                       <?php
                         if ($facture['status'] == 'pending') $status = 'warning';
-                        else if ($facture['status'] == 'complete') $status = 'positive';
+                        else if ($facture['status'] == 'Payé & mail envoyé') $status = 'positive';
                         else $status = 'negative';
                       ?>
                       <tr class="<?= $status; ?>">
