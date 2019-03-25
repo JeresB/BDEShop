@@ -69,10 +69,11 @@ $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 
         $("#payer").payWithLYDIA({
           amount: 0, // amount in €
-          vendor_token: '5c1a1463e1bde447906484',
+          //vendor_token: '5c1a1463e1bde447906484', // Token de test
+          vendor_token: '56ebe1831ba1203',
           recipient: '', //cellphone or email of your client. Leave it like this for your test
           message : "Achat BDE ISEN Shop", //object of the payment
-          env: "test",
+          //env: "test", // Only for test
           currency: 'EUR',
           type: 'phone',
           // The client will be redirect to this URL after the payment
