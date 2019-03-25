@@ -1,7 +1,9 @@
 <?php
+$root = realpath($_SERVER["DOCUMENT_ROOT"]);
 
+require_once("$root/admin/modele/factures.php");
 session_start();
-
-print("<pre>".print_r($_SESSION, true)."</pre>");
+  $gestion_bdd = new BDD_FACTURES();
+print('<pre>'.print_r($gestion_bdd->getEmail($order_ref), true).'</pre>');
 
 ?>
