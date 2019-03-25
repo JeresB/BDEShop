@@ -76,6 +76,17 @@ class BDD_FACTURES {
 
     return $resultat;
   }
+
+  public function getEmail($order_ref) {
+    $requete = $this->database->prepare("SELECT mail FROM factures WHERE id = :order_ref");
+    $requete->bindParam(':order_ref', $order_ref, PDO::PARAM_STR);
+
+    $requete->execute();
+
+    $resultat = $requete->fetch();
+
+    return $resultat;
+  }
 }
 
 ?>
