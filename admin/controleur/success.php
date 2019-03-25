@@ -45,7 +45,8 @@ if (isset($order_ref) && $order_ref!= null && $order_ref != '') {
   if (isset($_SESSION['mail']) && $_SESSION['mail'] != '' && $_SESSION['mail'] != null) {
     $mail->addAddress($_SESSION['mail']);
   } else {
-    error_log(print_r($gestion_bdd->getEmail($order_ref), true));
+    $resultat = $gestion_bdd->getEmail($order_ref);
+    $mail->addAddress($resultat['mail']);
   }
 
   // Set the subject line
