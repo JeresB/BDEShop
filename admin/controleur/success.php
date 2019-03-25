@@ -23,10 +23,10 @@ if (isset($order_ref) && $order_ref!= null && $order_ref != '') {
 
   // Import PHPMailer classes into the global namespace
   // These must be at the top of your script, not inside a function
-  require '../../vendor/phpmailer/phpmailer/src/Exception.php';
-  require '../../vendor/phpmailer/phpmailer/src/PHPMailer.php';
-  require '../../vendor/phpmailer/phpmailer/src/SMTP.php';
+  use PHPMailer\PHPMailer\PHPMailer;
+  use PHPMailer\PHPMailer\Exception;
 
+  //Load composer's autoloader
   require '../../vendor/autoload.php';
 
   // Create a new PHPMailer instance
