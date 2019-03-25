@@ -161,7 +161,11 @@ function extractEmails(text) {
           } else {
             $.ajax({
               url: "http://bde.digital-design.ovh/admin/controleur/success.php",
-            }).done(function() {
+							type: 'POST',
+							data: {
+								order_ref: order_ref
+							}
+						}).done(function() {
               window.location.href = "http://bde.digital-design.ovh/success.php";
             });
           }
