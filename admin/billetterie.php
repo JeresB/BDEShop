@@ -147,7 +147,7 @@ require_once("$root/admin/controleur/gestion_billetterie.php");
 
           <?php if ($update): ?>
             <button class="ui red button supprbilletterie" type="button" data="<?= $billetterie['id'] ?>">Supprimer cette billetterie</button>
-            <input type="hidden" name="id" value="<?= $billetterie['id'] ?>">
+            <input id="id_billetterie" type="hidden" name="id" value="<?= $billetterie['id'] ?>">
           <?php endif; ?>
 
           <a class="ui blue button right floated" href="/admin/admin.php"><i class="home icon"></i></a>
@@ -173,14 +173,14 @@ require_once("$root/admin/controleur/gestion_billetterie.php");
         $.ajax({
           type: "POST",
           url: 'controleur/get_billetterie_transaction.php',
-          data: {id: $(this).attr('data')},
+          data: {id: $("#id_billetterie").val()},
           success: function(data){
             console.log(data);
             if (!(data > 0)) {
               $.ajax({
                 type: "POST",
                 url: 'controleur/delete_billetterie.php',
-                data: {id: $(this).attr('data')},
+                data: {id: $("#id_billetterie").val()},
                 success: function(data){
                   window.location.replace("/admin/admin.php");
                 }
