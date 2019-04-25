@@ -9,6 +9,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
   $billetterie = $gestion_bdd->get($_GET['id']);
   $types = json_decode($billetterie['type']);
   $horaires = json_decode($billetterie['horaire']);
+  $codes_promo = json_decode($billetterie['code']);
 
   if (!$billetterie) {
     echo '<script type="text/javascript">

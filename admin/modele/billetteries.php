@@ -61,13 +61,13 @@ class BDD_BILLETTERIES {
     $horaires = json_decode($resultat['horaire']);
 
     foreach ($types as $key => $t) {
-      if ($t->{'nom'} == $type) {
+      if ($t->{'nom'} == $type && $t->{'quantite'} >= 0) {
         $types[$key]->{'place_prise'} += 1;
       }
     }
 
     foreach ($horaires as $key => $h) {
-      if ($h->{'nom'} == $horaire) {
+      if ($h->{'nom'} == $horaire && $h->{'quantite'} >= 0) {
         $horaires[$key]->{'place_prise'} += 1;
       }
     }
@@ -82,6 +82,45 @@ class BDD_BILLETTERIES {
     $requete->bindParam(':id', $id, PDO::PARAM_INT);
     $requete->bindParam(':type', $types);
     $requete->bindParam(':horaire', $horaires);
+
+    $resultat = $requete->execute();
+  }
+
+  public function equilibreQuantite($id, $nom1, $effet1, $nom2, $effet2, $var) {
+    $requete = $this->database->prepare("SELECT * FROM billetteries WHERE id = :id");
+    $requete->bindParam(':id', $id, PDO::PARAM_INT);
+    $requete->execute();
+    $resultat = $requete->fetch();
+
+    $result = json_decode($resultat[$var]);
+    //error_log("RESULTAT = ".print_r($result->{'11'}->{'place_prise'}, true));
+
+    foreach ($result as $key => $v) {
+      if ($v->{'nom'} == $nom1 && $v->{'quantite'} >= 0) {
+        if ($effet1 == 'moins') {
+          $result->{$key}->{'place_prise'} -= 1;
+        } elseif ($effet1 == 'plus') {
+          $result->{$key}->{'place_prise'} += 1;
+        }
+      }
+
+      if ($v->{'nom'} == $nom2 && $v->{'quantite'} >= 0) {
+        if ($effet2 == 'moins') {
+          $result->{$key}->{'place_prise'} -= 1;
+        } elseif ($effet2 == 'plus') {
+          $result->{$key}->{'place_prise'} += 1;
+        }
+      }
+    }
+
+    $result = json_encode($result);
+
+    $query = "UPDATE billetteries SET ".$var." = :var WHERE id = :id";
+
+    $requete = $this->database->prepare($query);
+
+    $requete->bindParam(':id', $id, PDO::PARAM_INT);
+    $requete->bindParam(':var', $result);
 
     $resultat = $requete->execute();
   }

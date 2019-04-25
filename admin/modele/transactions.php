@@ -61,7 +61,7 @@ class BDD_TRANSACTIONS {
   }
 
   public function get($id) {
-    $requete = $this->database->prepare("SELECT * FROM billetteries WHERE id = :id");
+    $requete = $this->database->prepare("SELECT * FROM transaction_billetterie WHERE id = :id");
 
     $requete->bindParam(':id', $id, PDO::PARAM_INT);
 
@@ -106,18 +106,22 @@ class BDD_TRANSACTIONS {
     return $order_ref;
   }
 
-  public function update($id, $nom, $place_total, $place_restante, $types, $horaires, $codes_promo) {
-    $requete = $this->database->prepare("UPDATE billetteries
-                                         SET nom = :nom, place_total = :place_total, place_restante = :place_restante, type = :type, horaire = :horaire, code = :code
+  public function update($id, $tel, $mail, $nom, $prenom, $promo, $type_place, $horaire, $code_promo, $infos_utile, $status) {
+    $requete = $this->database->prepare("UPDATE transaction_billetterie
+                                         SET tel = :tel, mail = :mail, nom = :nom, prenom = :prenom, promo = :promo, place = :place, horaire = :horaire, code_promo = :code_promo, infos_utile = :infos_utile, status = :status
                                          WHERE id = :id");
 
     $requete->bindParam(':id', $id, PDO::PARAM_INT);
+    $requete->bindParam(':tel', $tel, PDO::PARAM_STR);
+    $requete->bindParam(':mail', $mail, PDO::PARAM_STR);
     $requete->bindParam(':nom', $nom, PDO::PARAM_STR);
-    $requete->bindParam(':place_total', $place_total, PDO::PARAM_INT);
-    $requete->bindParam(':place_restante', $place_restante, PDO::PARAM_INT);
-    $requete->bindParam(':type', $types);
-    $requete->bindParam(':horaire', $horaires);
-    $requete->bindParam(':code', $codes_promo);
+    $requete->bindParam(':prenom', $prenom, PDO::PARAM_STR);
+    $requete->bindParam(':promo', $promo, PDO::PARAM_STR);
+    $requete->bindParam(':place', $type_place, PDO::PARAM_STR);
+    $requete->bindParam(':horaire', $horaire, PDO::PARAM_STR);
+    $requete->bindParam(':code_promo', $code_promo, PDO::PARAM_STR);
+    $requete->bindParam(':infos_utile', $infos_utile, PDO::PARAM_STR);
+    $requete->bindParam(':status', $status, PDO::PARAM_STR);
 
     $resultat = $requete->execute();
 

@@ -4,7 +4,6 @@ $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 require_once("$root/admin/controleur/securite.php");
 require_once("$root/admin/controleur/transactions.php");
 
-error_log(print_r($transactions, true));
 ?>
 
 <!doctype html>
@@ -28,6 +27,7 @@ error_log(print_r($transactions, true));
           Liste de toutes les transactions
         <?php else: ?>
           Transactions pour la billetterie n° <strong><?= $transactions[0]['id_Billetterie']; ?></strong>
+          <a class="ui basic blue button" href="transactions.php">Toutes les transactions</a>
         <?php endif; ?>
       </h4>
 
@@ -51,7 +51,7 @@ error_log(print_r($transactions, true));
         </thead>
         <tbody>
           <?php foreach ($transactions as $transaction): ?>
-            <tr>
+            <tr class='clickable-row' data-href="transaction.php?id=<?= $transactions[0]['id_Billetterie']; ?>&id_transaction=<?= $transaction['id']; ?>" style="cursor: pointer;">
               <td><?= $transaction['id']; ?></td>
               <td><?= $transaction['tel']; ?></td>
               <td><?= $transaction['mail']; ?></td>
@@ -86,5 +86,38 @@ error_log(print_r($transactions, true));
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="../semantic/semantic.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.dataTable.min.js"></script>
+    <script type="text/javascript" src="../semantic/dataTable.min.js"></script>
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+        $(".clickable-row").click(function() {
+            window.location = $(this).data("href");
+        });
+      });
+      $('.datatables').DataTable( {
+        language: {
+          processing:     "Traitement en cours...",
+          search:         "Rechercher&nbsp;:",
+          lengthMenu:    "Afficher _MENU_ &eacute;l&eacute;ments",
+          info:           "Affichage de l'&eacute;lement _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+          infoEmpty:      "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
+          infoFiltered:   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+          infoPostFix:    "",
+          loadingRecords: "Chargement en cours...",
+          zeroRecords:    "Aucun &eacute;l&eacute;ment &agrave; afficher",
+          emptyTable:     "Aucune donnée disponible dans le tableau",
+          paginate: {
+            first:      "Premier",
+            previous:   "Pr&eacute;c&eacute;dent",
+            next:       "Suivant",
+            last:       "Dernier"
+          },
+          aria: {
+            sortAscending:  ": activer pour trier la colonne par ordre croissant",
+            sortDescending: ": activer pour trier la colonne par ordre décroissant"
+          }
+        }
+      });
+    </script>
   </body>
 </html>
