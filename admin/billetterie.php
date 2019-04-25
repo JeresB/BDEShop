@@ -176,7 +176,7 @@ require_once("$root/admin/controleur/gestion_billetterie.php");
           data: {id: $(this).attr('data')},
           success: function(data){
             console.log(data);
-            if (!data > 0) {
+            if (!(data > 0)) {
               $.ajax({
                 type: "POST",
                 url: 'controleur/delete_billetterie.php',
