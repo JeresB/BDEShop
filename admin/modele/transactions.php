@@ -26,6 +26,18 @@ class BDD_TRANSACTIONS {
     return $resultat;
   }
 
+  public function count($id) {
+    $requete = $this->database->prepare("SELECT count(id) as nb FROM transaction_billetterie WHERE id_Billetterie = :id");
+
+    $requete->bindParam(':id', $id, PDO::PARAM_INT);
+
+    $requete->execute();
+
+    $resultat = $requete->fetch();
+
+    return $resultat;
+  }
+
   public function listAll() {
     $requete = $this->database->prepare("SELECT * FROM transaction_billetterie ORDER BY id");
 
