@@ -5,6 +5,7 @@ require_once("$root/admin/controleur/securite.php");
 require_once("$root/admin/controleur/categories.php");
 require_once("$root/admin/controleur/items.php");
 require_once("$root/admin/controleur/factures.php");
+require_once("$root/admin/controleur/billetteries.php");
 ?>
 
 <!doctype html>
@@ -41,6 +42,7 @@ require_once("$root/admin/controleur/factures.php");
             </a>
             <a id="link_events" class="item link_admin_menu" data="events">
               Evénements
+              <div class="ui blue label"><?= $nb_billetterie['nb'] ?></div>
             </a>
             <a href="controleur/deconnexion.php" class="item redmenuitem">
               Déconnexion
@@ -123,7 +125,7 @@ require_once("$root/admin/controleur/factures.php");
                 Exporter les factures au format CSV
               </a>
               <div class="ui relaxed divided list">
-                <table id="factures_table" class="ui selectable celled table" style="width:100%">
+                <table id="factures_table" class="ui selectable celled table datatables" style="width:100%">
                   <thead>
                     <tr>
                       <th>Commande n°</th>
@@ -163,8 +165,40 @@ require_once("$root/admin/controleur/factures.php");
             </div>
           </div>
           <div id="events" class="ui grid main_content"  style="display: none;">
-            <div class="ui center aligned segment">
-              Evenement a voir en réunion pour la billetterie !
+            <div class="ui center aligned segment list_billetterie">
+              <a class="ui fluid blue button" href="billetterie.php">
+                Crée une billetterie
+              </a>
+              <div class="ui relaxed divided list">
+                <table id="billetterie_table" class="ui selectable celled table datatables" style="width:100%">
+                  <thead>
+                    <tr>
+                      <th>Billetterie n°</th>
+                      <th>Nom</th>
+                      <th>Place</th>
+                      <th>Transaction</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php foreach ($billetteries as $billetterie): ?>
+                      <tr>
+                        <td><a href="billetterie.php?id=<?= $billetterie['id']; ?>"><?= $billetterie['id']; ?></a></td>
+                        <td><?= $billetterie['nom']; ?></td>
+                        <td><?= $billetterie['place_restante']; ?> / <?= $billetterie['place_total']; ?></td>
+                        <td><a class="ui button" href="transactions.php?id=<?= $billetterie['id']; ?>">Collect</a></td>
+                      </tr>
+                    <?php endforeach; ?>
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <th>Billetterie n°</th>
+                      <th>Nom</th>
+                      <th>Place</th>
+                      <th>Transaction</th>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
             </div>
           </div>
         </div>
@@ -210,7 +244,7 @@ require_once("$root/admin/controleur/factures.php");
           });
         });
 
-        $('#factures_table').DataTable( {
+        $('.datatables').DataTable( {
           language: {
             processing:     "Traitement en cours...",
             search:         "Rechercher&nbsp;:",

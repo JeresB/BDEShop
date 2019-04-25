@@ -11,6 +11,9 @@
         <a class="item" href="/boutique.php">
           Boutique
         </a>
+        <a class="item" href="/billetterie.php">
+          Billetterie
+        </a>
       </nav>
     </div>
   </div>
@@ -25,6 +28,9 @@
         </a>
         <a class="item" href="/boutique.php">
           <i class="shopping cart icon"></i>
+        </a>
+        <a class="item" href="/billetterie.php">
+          <i class="ticket alternate icon"></i>
         </a>
       </nav>
     </div>
