@@ -73,7 +73,7 @@ class BDD_TRANSACTIONS {
   }
 
   public function delete($id) {
-    $requete = $this->database->prepare("DELETE FROM billetteries WHERE id = :id");
+    $requete = $this->database->prepare("DELETE FROM transactions WHERE id = :id");
     $requete->bindParam(':id', $id, PDO::PARAM_INT);
 
     $resultat = $requete->execute();

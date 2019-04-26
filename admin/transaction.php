@@ -131,6 +131,17 @@ require_once("$root/admin/controleur/get_promo.php");
     <script type="text/javascript">
       $(document).ready(function() {
         $('select.dropdown').dropdown();
+
+        $(".supprtransaction").click(function() {
+          $.ajax({
+            type: "POST",
+            url: 'controleur/delete_transaction.php',
+            data: {id: $("#id_transaction").val()},
+            success: function(data){
+              window.location.replace("/admin/admin.php");
+            }
+          });
+        });
       });
     </script>
   </body>
