@@ -27,7 +27,7 @@ require_once("$root/admin/controleur/billetteries.php");
             <?php if ($billetterie['active'] && $billetterie['place_restante'] > 0): ?>
               <div class="ui card">
                 <div class="image">
-                  <img src="/images/<?= $billetterie['photo']; ?>">
+                  <img src="/images/<?= $billetterie['photo']; ?>" style="padding-bottom: 10px;">
                 </div>
                 <div class="content">
                   <div class="header"><?= $billetterie['nom']; ?></div>
