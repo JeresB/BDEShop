@@ -45,7 +45,7 @@ require_once("$root/admin/controleur/get_promo.php");
                     $quantite = 'infini';
                   }
                 ?>
-                <option id="<?= $type->{'nom'} ?>" value="<?= $type->{'nom'} ?>" <?= ($quantite === 0) ? 'disabled' : ''; ?> prix="<?= $type->{'prix'} ?>"><?= $type->{'nom'} ?> / Prix : <?= $type->{'prix'} ?> / Quantité restante : <?= $quantite ?></option>
+                <option id="<?php echo str_replace(' ','',trim($type->{'nom'})); ?>" value="<?= $type->{'nom'} ?>" <?= ($quantite === 0) ? 'disabled' : ''; ?> prix="<?= $type->{'prix'} ?>"><?= $type->{'nom'} ?> / Prix : <?= $type->{'prix'} ?> / Quantité restante : <?= $quantite ?></option>
               <?php endforeach; ?>
             </select>
           </div>

@@ -68,7 +68,7 @@ function gestion_promo() {
 }
 
 function gestion_prix() {
-  var id = $('#type_place').val();
+  var id = $('#type_place').val().trim().replace(/ /g,"");
   var prix = $('#' + id).attr('prix');
 
   var type_code_promo = $('#code_promo').attr('type_promo');
