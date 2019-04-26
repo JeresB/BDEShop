@@ -27,7 +27,7 @@ class BDD_BILLETTERIES {
   }
 
   public function list() {
-    $requete = $this->database->prepare("SELECT id, nom, place_total, place_restante FROM billetteries ORDER BY id");
+    $requete = $this->database->prepare("SELECT id, nom, place_total, place_restante, photo, active FROM billetteries ORDER BY id");
 
     $requete->execute();
 
@@ -86,6 +86,35 @@ class BDD_BILLETTERIES {
     $resultat = $requete->execute();
   }
 
+  public function updateQuantiteCodePromo($id, $code_promo) {
+    $requete = $this->database->prepare("SELECT * FROM billetteries WHERE id = :id");
+
+    $requete->bindParam(':id', $id, PDO::PARAM_INT);
+
+    $requete->execute();
+
+    $resultat = $requete->fetch();
+
+    $codes_promo = json_decode($resultat['code']);
+
+    foreach ($codes_promo as $key => $c) {
+      if ($c->{'nom'} == $code_promo) {
+        $codes_promo->{$key}->{'quantite'} -= 1;
+      }
+    }
+
+    $codes_promo = json_encode($codes_promo);
+
+    $requete = $this->database->prepare("UPDATE billetteries
+                                         SET code = :code
+                                         WHERE id = :id");
+
+    $requete->bindParam(':id', $id, PDO::PARAM_INT);
+    $requete->bindParam(':code', $codes_promo);
+
+    $resultat = $requete->execute();
+  }
+
   public function equilibreQuantite($id, $nom1, $effet1, $nom2, $effet2, $var) {
     $requete = $this->database->prepare("SELECT * FROM billetteries WHERE id = :id");
     $requete->bindParam(':id', $id, PDO::PARAM_INT);
@@ -134,9 +163,9 @@ class BDD_BILLETTERIES {
     return $resultat;
   }
 
-  public function add($nom, $place_total, $place_restante, $types, $horaires, $codes_promo) {
-    $requete = $this->database->prepare("INSERT INTO billetteries (nom, place_total, place_restante, type, horaire, code)
-                                         VALUES (:nom, :place_total, :place_restante, :type, :horaire, :code)");
+  public function add($nom, $place_total, $place_restante, $types, $horaires, $codes_promo, $photo, $activation) {
+    $requete = $this->database->prepare("INSERT INTO billetteries (nom, place_total, place_restante, type, horaire, code, photo, active)
+                                         VALUES (:nom, :place_total, :place_restante, :type, :horaire, :code, :photo, :active)");
 
     $requete->bindParam(':nom', $nom, PDO::PARAM_STR);
     $requete->bindParam(':place_total', $place_total, PDO::PARAM_INT);
@@ -144,15 +173,17 @@ class BDD_BILLETTERIES {
     $requete->bindParam(':type', $types);
     $requete->bindParam(':horaire', $horaires);
     $requete->bindParam(':code', $codes_promo);
+    $requete->bindParam(':photo', $photo, PDO::PARAM_STR);
+    $requete->bindParam(':active', $activation);
 
     $resultat = $requete->execute();
 
     return $resultat;
   }
 
-  public function update($id, $nom, $place_total, $place_restante, $types, $horaires, $codes_promo) {
+  public function update($id, $nom, $place_total, $place_restante, $types, $horaires, $codes_promo, $photo, $activation) {
     $requete = $this->database->prepare("UPDATE billetteries
-                                         SET nom = :nom, place_total = :place_total, place_restante = :place_restante, type = :type, horaire = :horaire, code = :code
+                                         SET nom = :nom, place_total = :place_total, place_restante = :place_restante, type = :type, horaire = :horaire, code = :code, active = :active, photo = :photo
                                          WHERE id = :id");
 
     $requete->bindParam(':id', $id, PDO::PARAM_INT);
@@ -162,6 +193,8 @@ class BDD_BILLETTERIES {
     $requete->bindParam(':type', $types);
     $requete->bindParam(':horaire', $horaires);
     $requete->bindParam(':code', $codes_promo);
+    $requete->bindParam(':photo', $photo, PDO::PARAM_STR);
+    $requete->bindParam(':active', $activation);
 
     $resultat = $requete->execute();
 

@@ -73,9 +73,10 @@ function addCode_Promo() {
 
     var text = '<div id="type' + num + '" class="ui grid">'
     text += '<div class="four wide column"><input type="text" placeholder="nom" name="codes_promo[' + num + '][nom]" value=""></div>'
-    text += '<div class="four wide column"><input type="text" placeholder="type" name="codes_promo[' + num + '][type]" value=""></div>'
-    text += '<div class="four wide column"><input type="text" placeholder="effet" name="codes_promo[' + num + '][effet]" value=""></div>'
-    text += '<div class="four wide column"><button class="ui fluid basic red button supprtype" data="' + num + '"><i class="trash icon"></i></button></div></div>'
+    text += '<div class="three wide column"><input type="text" placeholder="type" name="codes_promo[' + num + '][type]" value=""></div>'
+    text += '<div class="three wide column"><input type="text" placeholder="effet" name="codes_promo[' + num + '][effet]" value=""></div>'
+    text += '<div class="three wide column"><input type="text" placeholder="quantite" name="codes_promo[' + num + '][quantite]" value=""></div>'
+    text += '<div class="three wide column"><button class="ui fluid basic red button supprtype" data="' + num + '"><i class="trash icon"></i></button></div></div>'
 
     $("#div_codes_promo").append(text)
 

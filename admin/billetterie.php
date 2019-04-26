@@ -23,7 +23,7 @@ require_once("$root/admin/controleur/gestion_billetterie.php");
       <div class="ui segment">
         <h4 class="ui header">Billetterie<?php if ($update): ?> n° <strong><?= $billetterie['id']; ?></strong><?php endif; ?></h4>
 
-        <form id="form_billetterie" class="ui form" action="controleur/traitement_gestion_billetterie.php" method="post">
+        <form id="form_billetterie" class="ui form" action="controleur/traitement_gestion_billetterie.php" method="post" enctype="multipart/form-data">
           <div class="ui message">
             Pour une quantité infini, il faut mettre -1
           </div>
@@ -39,6 +39,26 @@ require_once("$root/admin/controleur/gestion_billetterie.php");
           <div class="field">
             <label>Places restantes</label>
             <input type="text" name="place_restante" value="<?= ($update) ? $billetterie['place_restante'] : '' ?>">
+          </div>
+
+          <div class="ui divider"></div>
+
+          <div class="inline field">
+            <div class="ui toggle checkbox">
+              <label>Activation Billetterie</label>
+              <input type="checkbox" tabindex="0" class="hidden" name="activation" <?php if ($update) { if ($billetterie['active']) { echo 'checked'; }} ?>>
+            </div>
+          </div>
+
+          <div class="ui divider"></div>
+
+          <div class="field">
+            <label>Photo</label>
+            <input type="hidden" name="save_photo" value="<?= $billetterie['photo'] ?>">
+            <?php if ($update): ?>
+              <img class="ui small image" src="/images/<?= $billetterie['photo'] ?>">
+            <?php endif; ?>
+            <input id="uploadImage" type="file" accept="images/*" name="image" />
           </div>
 
           <div class="ui divider"></div>
@@ -122,13 +142,16 @@ require_once("$root/admin/controleur/gestion_billetterie.php");
                   <div class="four wide column">
                     <input type="text" placeholder="nom" name="codes_promo[<?= $key ?>][nom]" value="<?= ($update) ? $code_promo->{'nom'} : '' ?>">
                   </div>
-                  <div class="four wide column">
+                  <div class="three wide column">
                     <input type="text" placeholder="type" name="codes_promo[<?= $key ?>][type]" value="<?= ($update) ? $code_promo->{'type'} : '' ?>">
                   </div>
-                  <div class="four wide column">
+                  <div class="three wide column">
                     <input type="text" placeholder="effet" name="codes_promo[<?= $key ?>][effet]" value="<?= ($update) ? $code_promo->{'effet'} : '' ?>">
                   </div>
-                  <div class="four wide column">
+                  <div class="three wide column">
+                    <input type="text" placeholder="quantite" name="codes_promo[<?= $key ?>][quantite]" value="<?= ($update) ? $code_promo->{'quantite'} : '' ?>">
+                  </div>
+                  <div class="three wide column">
                     <button class="ui fluid basic red button supprcode_promo" data="<?= $code_promo_num ?>"><i class="trash icon"></i></button>
                   </div>
                 </div>
@@ -160,6 +183,8 @@ require_once("$root/admin/controleur/gestion_billetterie.php");
     <script type="text/javascript" src="../semantic/semantic.min.js"></script>
     <script type="text/javascript" src="../js/gestion_billetterie.js"></script>
     <script type="text/javascript">
+      $('.ui.checkbox').checkbox()
+
       addType()
       deleteType()
 

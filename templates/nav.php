@@ -14,6 +14,16 @@
         <a class="item" href="/billetterie.php">
           Billetterie
         </a>
+        <?php
+          if(!isset($_SESSION)) {
+            session_start();
+          }
+          if ($_SESSION['admin']) {
+            echo '<a class="item" href="/admin/admin.php">
+              Accueil Admin
+            </a>';
+          }
+        ?>
       </nav>
     </div>
   </div>

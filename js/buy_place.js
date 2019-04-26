@@ -45,12 +45,17 @@ function gestion_promo() {
         console.log(codes_promo);
         codes_promo = JSON.parse(codes_promo)
 
-        var form_code_promo = $("#code_promo").val()
-
         $.each(codes_promo, function(i, code_promo) {
           console.log(JSON.stringify(code_promo));
 
-          if ($('#code_promo').val() == code_promo.nom) {
+          if ($('#code_promo').val() == code_promo.nom && code_promo.quantite > 0) {
+            var div = document.getElementById('message_code_promo');
+            div.innerHTML = 'test';
+
+            var text = '<div class="ui message">Le code promo : ' + code_promo.nom + ' de type : ' + code_promo.type + ' avec un effet de : ' + code_promo.effet + ' a été appliqué.</div><div class="ui hidden divider"></div>';
+
+            div.innerHTML = text;
+
             console.log(code_promo.nom);
             $('#code_promo').attr('type_promo', code_promo.type)
             $('#code_promo').attr('effet', code_promo.effet)

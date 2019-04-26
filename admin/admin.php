@@ -177,7 +177,7 @@ require_once("$root/admin/controleur/billetteries.php");
                         else $status = 'negative';
                       ?>
                       <tr class="<?= $status; ?>">
-                        <td><a href="facture.php?id=<?= $facture['id']; ?>"><?= $facture['id']; ?></a></td>
+                        <td><a href="facture.php?id=<?= $facture['id']; ?>"><div class="ui blue label"><?= $facture['id']; ?> <i class="edit icon"></i></div></a></td>
                         <td><?= $facture['mail']; ?></td>
                         <td><?= $facture['status']; ?></td>
                         <td><?= $facture['complement']; ?></td>
@@ -210,15 +210,17 @@ require_once("$root/admin/controleur/billetteries.php");
                       <th>Billetterie n°</th>
                       <th>Nom</th>
                       <th>Place</th>
+                      <th>Activation</th>
                       <th>Transaction</th>
                     </tr>
                   </thead>
                   <tbody>
                     <?php foreach ($billetteries as $billetterie): ?>
                       <tr>
-                        <td><a href="billetterie.php?id=<?= $billetterie['id']; ?>"><?= $billetterie['id']; ?></a></td>
+                        <td><a href="billetterie.php?id=<?= $billetterie['id']; ?>"><div class="ui blue label"><?= $billetterie['id']; ?> <i class="edit icon"></i></div></a></td>
                         <td><?= $billetterie['nom']; ?></td>
                         <td><?= $billetterie['place_restante']; ?> / <?= $billetterie['place_total']; ?></td>
+                        <td><?= ($billetterie['active']) ? 'Activé' : 'Désactivé'; ?></td>
                         <td><a class="ui button" href="transactions.php?id=<?= $billetterie['id']; ?>">Collect</a></td>
                       </tr>
                     <?php endforeach; ?>
@@ -228,6 +230,7 @@ require_once("$root/admin/controleur/billetteries.php");
                       <th>Billetterie n°</th>
                       <th>Nom</th>
                       <th>Place</th>
+                      <th>Activation</th>
                       <th>Transaction</th>
                     </tr>
                   </tfoot>

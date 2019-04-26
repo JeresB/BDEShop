@@ -48,7 +48,7 @@ require_once("$root/admin/controleur/get_promo.php");
                     $quantite = 'infini';
                   }
                 ?>
-                <option id="<?= $type->{'nom'} ?>" value="<?= $type->{'nom'} ?>" prix="<?= $type->{'prix'} ?>"><?= $type->{'nom'} ?> / Prix : <?= $type->{'prix'} ?> / Quantité restante : <?= $quantite ?></option>
+                <option id="<?= $type->{'nom'} ?>" value="<?= $type->{'nom'} ?>" <?= ($quantite === 0) ? 'disabled' : ''; ?> prix="<?= $type->{'prix'} ?>"><?= $type->{'nom'} ?> / Prix : <?= $type->{'prix'} ?> / Quantité restante : <?= $quantite ?></option>
               <?php endforeach; ?>
             </select>
           </div>
@@ -64,7 +64,7 @@ require_once("$root/admin/controleur/get_promo.php");
                     $quantite = 'infini';
                   }
                 ?>
-                <option value="<?= $horaire->{'nom'} ?>"><?= $horaire->{'nom'} ?> / Quantité restante : <?= $quantite ?></option>
+                <option value="<?= $horaire->{'nom'} ?>" <?= ($quantite === 0) ? 'disabled' : ''; ?>><?= $horaire->{'nom'} ?> / Quantité restante : <?= $quantite ?></option>
               <?php endforeach; ?>
             </select>
           </div>
