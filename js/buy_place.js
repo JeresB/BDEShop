@@ -84,7 +84,7 @@ function gestion_prix() {
 
   $('#prix').val(prix);
 
-  var text = '<div class="ui message">Prix : ' + prix + '</div>'
+  var text = '<div class="ui massive message">Prix : ' + prix + '</div>'
 
   $("#message_prix").html(text)
 }
