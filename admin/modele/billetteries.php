@@ -62,13 +62,13 @@ class BDD_BILLETTERIES {
 
     foreach ($types as $key => $t) {
       if ($t->{'nom'} == $type && $t->{'quantite'} >= 0) {
-        $types[$key]->{'place_prise'} += 1;
+        $types->{$key}->{'place_prise'} += 1;
       }
     }
 
     foreach ($horaires as $key => $h) {
       if ($h->{'nom'} == $horaire && $h->{'quantite'} >= 0) {
-        $horaires[$key]->{'place_prise'} += 1;
+        $horaires->{$key}->{'place_prise'} += 1;
       }
     }
 

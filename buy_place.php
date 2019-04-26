@@ -172,7 +172,7 @@ require_once("$root/admin/controleur/get_promo.php");
           // The client will be redirect to this URL after the payment
           browser_success_url : "http://bde.digital-design.ovh/success.php",
           // This URL will be called by our server after the payment so you can update the order on your database
-          confirm_url : "http://bde.digital-design.ovh/admin/controleur/success.php"
+          confirm_url : "http://bde.digital-design.ovh/admin/controleur/success_billetterie.php"
         });
       });
     </script>
