@@ -21,12 +21,12 @@ if(!empty($transactions) && $transactions != null){
   $f = fopen('php://memory', 'w');
 
   //set column headers
-  $fields = array('id', 'id_billetterie', 'tel', 'mail', 'nom', 'prenom', 'promo', 'place', 'horaire', 'code_promo', 'infos_utile', 'status');
+  $fields = array('id', 'id_billetterie', 'tel', 'mail', 'nom', 'prenom', 'promo', 'place', 'horaire', 'code_promo', 'infos_utile', 'status', 'date_creation');
   fputcsv($f, $fields, $delimiter);
 
   //output each row of the data, format line as csv and write to file pointer
   foreach ($transactions as $key => $transaction) {
-    $lineData = array($transaction['id'], $transaction['id_Billetterie'], $transaction['tel'], $transaction['mail'], $transaction['nom'], $transaction['prenom'], $transaction['promo'], $transaction['place'], $transaction['horaire'], $transaction['code_promo'], $transaction['infos_utile'], $transaction['status']);
+    $lineData = array($transaction['id'], $transaction['id_Billetterie'], $transaction['tel'], $transaction['mail'], $transaction['nom'], $transaction['prenom'], $transaction['promo'], $transaction['place'], $transaction['horaire'], $transaction['code_promo'], $transaction['infos_utile'], $transaction['status'], $transaction['date_creation']);
     fputcsv($f, $lineData, $delimiter);
   }
 
