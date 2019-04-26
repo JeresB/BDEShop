@@ -61,13 +61,13 @@ class BDD_BILLETTERIES {
     $horaires = json_decode($resultat['horaire']);
 
     foreach ($types as $key => $t) {
-      if ($t->{'nom'} == $type && $t->{'quantite'} >= 0) {
+      if ($t->{'nom'} == $type) {
         $types->{$key}->{'place_prise'} += 1;
       }
     }
 
     foreach ($horaires as $key => $h) {
-      if ($h->{'nom'} == $horaire && $h->{'quantite'} >= 0) {
+      if ($h->{'nom'} == $horaire) {
         $horaires->{$key}->{'place_prise'} += 1;
       }
     }
@@ -96,7 +96,7 @@ class BDD_BILLETTERIES {
     //error_log("RESULTAT = ".print_r($result->{'11'}->{'place_prise'}, true));
 
     foreach ($result as $key => $v) {
-      if ($v->{'nom'} == $nom1 && $v->{'quantite'} >= 0) {
+      if ($v->{'nom'} == $nom1) {
         if ($effet1 == 'moins') {
           $result->{$key}->{'place_prise'} -= 1;
         } elseif ($effet1 == 'plus') {
@@ -104,7 +104,7 @@ class BDD_BILLETTERIES {
         }
       }
 
-      if ($v->{'nom'} == $nom2 && $v->{'quantite'} >= 0) {
+      if ($v->{'nom'} == $nom2) {
         if ($effet2 == 'moins') {
           $result->{$key}->{'place_prise'} -= 1;
         } elseif ($effet2 == 'plus') {
