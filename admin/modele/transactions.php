@@ -127,6 +127,29 @@ class BDD_TRANSACTIONS {
 
     return $resultat;
   }
+
+  public function updateStatus($order_ref, $status) {
+    $requete = $this->database->prepare("UPDATE transaction_billetterie
+                                         SET status = :status
+                                         WHERE id = :id");
+    $requete->bindParam(':status', $status, PDO::PARAM_STR);
+    $requete->bindParam(':id', $order_ref, PDO::PARAM_INT);
+
+    $resultat = $requete->execute();
+
+    return $resultat;
+  }
+
+  public function getEmail($order_ref) {
+    $requete = $this->database->prepare("SELECT mail FROM transaction_billetterie WHERE id = :order_ref");
+    $requete->bindParam(':order_ref', $order_ref, PDO::PARAM_STR);
+
+    $requete->execute();
+
+    $resultat = $requete->fetch();
+
+    return $resultat;
+  }
 }
 
 ?>

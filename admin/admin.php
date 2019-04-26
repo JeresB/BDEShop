@@ -3,6 +3,7 @@ $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 
 require_once("$root/admin/controleur/securite.php");
 require_once("$root/admin/controleur/categories.php");
+require_once("$root/admin/controleur/promos.php");
 require_once("$root/admin/controleur/items.php");
 require_once("$root/admin/controleur/factures.php");
 require_once("$root/admin/controleur/billetteries.php");
@@ -31,6 +32,10 @@ require_once("$root/admin/controleur/billetteries.php");
             <a id="link_categories" class="active item link_admin_menu" data="categories">
               Catégories
               <div class="ui blue label"><?= $nb_categorie['nb'] ?></div>
+            </a>
+            <a id="link_promos" class="active item link_admin_menu" data="promos">
+              Promos
+              <div class="ui blue label"><?= $nb_promos['nb'] ?></div>
             </a>
             <a id="link_items" class="item link_admin_menu" data="items">
               Items
@@ -71,6 +76,35 @@ require_once("$root/admin/controleur/billetteries.php");
                         </div>
                         <div class="four wide field">
                           <div class="ui submit primary button addcategorie"><i class="plus icon"></i></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="promos" class="ui grid main_content"  style="display: none;">
+            <?php foreach ($promos as $promo): ?>
+              <div class="four wide computer eight wide tablet sixteen wide mobilecolumn">
+                <div class="ui card">
+                  <div class="content">
+                    <div class="header"><span><?= $promo['nom'] ?></span><span class="ui right floated trashpromo" data="<?= $promo['id'] ?>"><i class="trash alternate red icon"></i></span></div>
+                  </div>
+                </div>
+              </div>
+            <?php endforeach; ?>
+            <div class="sixteen wide column">
+              <div class="">
+                <div class="content">
+                  <div class="center aligned header">
+                    <div class="ui form">
+                      <div class="inline fields">
+                        <div class="twelve wide field">
+                          <input id="newpromo" type="text" name="newpromo" placeholder="Nom de la promo">
+                        </div>
+                        <div class="four wide field">
+                          <div class="ui submit primary button addpromo"><i class="plus icon"></i></div>
                         </div>
                       </div>
                     </div>
@@ -238,6 +272,28 @@ require_once("$root/admin/controleur/billetteries.php");
             type: "POST",
             url: 'controleur/add_categorie.php',
             data: {nom: $("#newcategorie").val()},
+            success: function(data){
+              location.reload();
+            }
+          });
+        });
+
+        $(".trashpromo").click(function() {
+          $.ajax({
+            type: "POST",
+            url: 'controleur/delete_promo.php',
+            data: {id: $(this).attr('data')},
+            success: function(data){
+              location.reload();
+            }
+          });
+        });
+
+        $(".addpromo").click(function() {
+          $.ajax({
+            type: "POST",
+            url: 'controleur/add_promo.php',
+            data: {nom: $("#newpromo").val()},
             success: function(data){
               location.reload();
             }

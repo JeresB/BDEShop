@@ -49,7 +49,7 @@ class BDD_PROMOS {
   }
 
   public function delete($id) {
-    $requete = $this->database->prepare("DELETE FROM billetteries WHERE id = :id");
+    $requete = $this->database->prepare("DELETE FROM promos WHERE id = :id");
     $requete->bindParam(':id', $id, PDO::PARAM_INT);
 
     $resultat = $requete->execute();
@@ -57,34 +57,9 @@ class BDD_PROMOS {
     return $resultat;
   }
 
-  public function add($nom, $place_total, $place_restante, $types, $horaires, $codes_promo) {
-    $requete = $this->database->prepare("INSERT INTO billetteries (nom, place_total, place_restante, type, horaire, code)
-                                         VALUES (:nom, :place_total, :place_restante, :type, :horaire, :code)");
-
+  public function add($nom) {
+    $requete = $this->database->prepare("INSERT INTO promos (nom) VALUES (:nom)");
     $requete->bindParam(':nom', $nom, PDO::PARAM_STR);
-    $requete->bindParam(':place_total', $place_total, PDO::PARAM_INT);
-    $requete->bindParam(':place_restante', $place_restante, PDO::PARAM_INT);
-    $requete->bindParam(':type', $types);
-    $requete->bindParam(':horaire', $horaires);
-    $requete->bindParam(':code', $codes_promo);
-
-    $resultat = $requete->execute();
-
-    return $resultat;
-  }
-
-  public function update($id, $nom, $place_total, $place_restante, $types, $horaires, $codes_promo) {
-    $requete = $this->database->prepare("UPDATE billetteries
-                                         SET nom = :nom, place_total = :place_total, place_restante = :place_restante, type = :type, horaire = :horaire, code = :code
-                                         WHERE id = :id");
-
-    $requete->bindParam(':id', $id, PDO::PARAM_INT);
-    $requete->bindParam(':nom', $nom, PDO::PARAM_STR);
-    $requete->bindParam(':place_total', $place_total, PDO::PARAM_INT);
-    $requete->bindParam(':place_restante', $place_restante, PDO::PARAM_INT);
-    $requete->bindParam(':type', $types);
-    $requete->bindParam(':horaire', $horaires);
-    $requete->bindParam(':code', $codes_promo);
 
     $resultat = $requete->execute();
 
