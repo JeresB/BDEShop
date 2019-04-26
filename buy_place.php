@@ -13,18 +13,14 @@ require_once("$root/admin/controleur/get_promo.php");
 
   <body>
     <div class="ui container">
-      <h2 class="ui center aligned icon header">
-        <i class="ticket alternate icon"></i>
-        <?= $billetterie['nom']; ?>
-      </h2>
 
       <div class="ui segment">
+        <img class="ui fluid rounded image" src="/images/<?= $billetterie['photo']; ?>" alt="Photo billetterie">
 
         <div class="ui message">
           <div class="header">
-            Description
+            <?= $billetterie['nom']; ?>
           </div>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In facilisis venenatis orci ornare interdum. Fusce vehicula.</p>
         </div>
 
         <input id="id_billetterie" type="hidden" name="id_billetterie" value="<?= $billetterie['id']; ?>">
