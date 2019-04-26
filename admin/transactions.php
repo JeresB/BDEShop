@@ -53,6 +53,7 @@ require_once("$root/admin/controleur/transactions.php");
             <th>Code promo</th>
             <th>Infos utile</th>
             <th>Status</th>
+            <th>Date</th>
           </tr>
         </thead>
         <tbody>
@@ -69,6 +70,7 @@ require_once("$root/admin/controleur/transactions.php");
               <td><?= $transaction['code_promo']; ?></td>
               <td><?= $transaction['infos_utile']; ?></td>
               <td><?= $transaction['status']; ?></td>
+              <td><?= $transaction['date_creation']; ?></td>
             </tr>
           <?php endforeach; ?>
         </tbody>
@@ -85,6 +87,7 @@ require_once("$root/admin/controleur/transactions.php");
             <th>Code promo</th>
             <th>Infos utile</th>
             <th>Status</th>
+            <th>Date</th>
           </tr>
         </tfoot>
       </table>

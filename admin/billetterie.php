@@ -33,6 +33,11 @@ require_once("$root/admin/controleur/gestion_billetterie.php");
           </div>
 
           <div class="field">
+            <label>Description</label>
+            <textarea id="description" name="description" rows="3" maxlength="8192"><?= ($update) ? $billetterie['description'] : '' ?></textarea>
+          </div>
+
+          <div class="field">
             <label>Places total</label>
             <input type="text" name="place_total" value="<?= ($update) ? $billetterie['place_total'] : '' ?>">
           </div>
@@ -143,7 +148,14 @@ require_once("$root/admin/controleur/gestion_billetterie.php");
                     <input type="text" placeholder="nom" name="codes_promo[<?= $key ?>][nom]" value="<?= ($update) ? $code_promo->{'nom'} : '' ?>">
                   </div>
                   <div class="three wide column">
-                    <input type="text" placeholder="type" name="codes_promo[<?= $key ?>][type]" value="<?= ($update) ? $code_promo->{'type'} : '' ?>">
+                    <div class="field">
+                      <select id="type_code_promo" class="ui dropdown" name="codes_promo[<?= $key ?>][type]" value="<?= ($update) ? $code_promo->{'type'} : '' ?>">
+                        <option value="">Type de code promo</option>
+                        <option value="prix" <?php if($update) { if($code_promo->{'type'} == 'prix') { echo 'selected'; }} ?>>Prix</option>
+                        <option value="pourcentage" <?php if($update) { if($code_promo->{'type'} == 'pourcentage') { echo 'selected'; }} ?>>Pourcentage</option>
+                        <option value="reduction" <?php if($update) { if($code_promo->{'type'} == 'reduction') { echo 'selected'; }} ?>>Reduction</option>
+                      </select>
+                    </div>
                   </div>
                   <div class="three wide column">
                     <input type="text" placeholder="effet" name="codes_promo[<?= $key ?>][effet]" value="<?= ($update) ? $code_promo->{'effet'} : '' ?>">
@@ -184,6 +196,7 @@ require_once("$root/admin/controleur/gestion_billetterie.php");
     <script type="text/javascript" src="../js/gestion_billetterie.js"></script>
     <script type="text/javascript">
       $('.ui.checkbox').checkbox()
+      $('select.dropdown').dropdown();
 
       addType()
       deleteType()

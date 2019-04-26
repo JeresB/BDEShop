@@ -27,7 +27,7 @@ class BDD_BILLETTERIES {
   }
 
   public function list() {
-    $requete = $this->database->prepare("SELECT id, nom, place_total, place_restante, photo, active FROM billetteries ORDER BY id");
+    $requete = $this->database->prepare("SELECT id, nom, description, place_total, place_restante, photo, active FROM billetteries ORDER BY id");
 
     $requete->execute();
 
@@ -163,11 +163,12 @@ class BDD_BILLETTERIES {
     return $resultat;
   }
 
-  public function add($nom, $place_total, $place_restante, $types, $horaires, $codes_promo, $photo, $activation) {
-    $requete = $this->database->prepare("INSERT INTO billetteries (nom, place_total, place_restante, type, horaire, code, photo, active)
-                                         VALUES (:nom, :place_total, :place_restante, :type, :horaire, :code, :photo, :active)");
+  public function add($nom, $description, $place_total, $place_restante, $types, $horaires, $codes_promo, $photo, $activation) {
+    $requete = $this->database->prepare("INSERT INTO billetteries (nom, description, place_total, place_restante, type, horaire, code, photo, active)
+                                         VALUES (:nom, :description, :place_total, :place_restante, :type, :horaire, :code, :photo, :active)");
 
     $requete->bindParam(':nom', $nom, PDO::PARAM_STR);
+    $requete->bindParam(':description', $description, PDO::PARAM_STR);
     $requete->bindParam(':place_total', $place_total, PDO::PARAM_INT);
     $requete->bindParam(':place_restante', $place_restante, PDO::PARAM_INT);
     $requete->bindParam(':type', $types);
@@ -181,13 +182,14 @@ class BDD_BILLETTERIES {
     return $resultat;
   }
 
-  public function update($id, $nom, $place_total, $place_restante, $types, $horaires, $codes_promo, $photo, $activation) {
+  public function update($id, $nom, $description, $place_total, $place_restante, $types, $horaires, $codes_promo, $photo, $activation) {
     $requete = $this->database->prepare("UPDATE billetteries
-                                         SET nom = :nom, place_total = :place_total, place_restante = :place_restante, type = :type, horaire = :horaire, code = :code, active = :active, photo = :photo
+                                         SET nom = :nom, description = :description, place_total = :place_total, place_restante = :place_restante, type = :type, horaire = :horaire, code = :code, active = :active, photo = :photo
                                          WHERE id = :id");
 
     $requete->bindParam(':id', $id, PDO::PARAM_INT);
     $requete->bindParam(':nom', $nom, PDO::PARAM_STR);
+    $requete->bindParam(':description', $description, PDO::PARAM_STR);
     $requete->bindParam(':place_total', $place_total, PDO::PARAM_INT);
     $requete->bindParam(':place_restante', $place_restante, PDO::PARAM_INT);
     $requete->bindParam(':type', $types);

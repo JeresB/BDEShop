@@ -21,6 +21,7 @@ require_once("$root/admin/controleur/get_promo.php");
           <div class="header">
             <?= $billetterie['nom']; ?>
           </div>
+          <p><?= $billetterie['description']; ?></p>
         </div>
 
         <input id="id_billetterie" type="hidden" name="id_billetterie" value="<?= $billetterie['id']; ?>">

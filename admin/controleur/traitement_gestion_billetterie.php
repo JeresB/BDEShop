@@ -48,9 +48,9 @@ if (isset($_POST) && !empty($_POST)) {
   $gestion_bdd = new BDD_BILLETTERIES();
 
   if ($update == 1) {
-    $success = $gestion_bdd->update($_POST['id'], $_POST['nom'], $_POST['place_total'], $_POST['place_restante'], $types, $horaires, $codes_promo, $photo, $activation);
+    $success = $gestion_bdd->update($_POST['id'], $_POST['nom'], $_POST['description'], $_POST['place_total'], $_POST['place_restante'], $types, $horaires, $codes_promo, $photo, $activation);
   } else {
-    $success = $gestion_bdd->add($_POST['nom'], $_POST['place_total'], $_POST['place_restante'], $types, $horaires, $codes_promo, $photo, $activation);
+    $success = $gestion_bdd->add($_POST['nom'], $_POST['description'], $_POST['place_total'], $_POST['place_restante'], $types, $horaires, $codes_promo, $photo, $activation);
   }
 
   echo '<script type="text/javascript">
