@@ -163,7 +163,7 @@
             lydiaProcess.sendRequest()
           } else {
             $.ajax({
-              url: "http://bde.digital-design.ovh/admin/controleur/success.php",
+              url: "http://bde.digital-design.ovh/admin/controleur/success_billetterie.php",
 							type: 'POST',
 							data: {
 								order_ref: order_ref
