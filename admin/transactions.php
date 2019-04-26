@@ -52,7 +52,7 @@ require_once("$root/admin/controleur/transactions.php");
         <tbody>
           <?php foreach ($transactions as $transaction): ?>
             <tr class='clickable-row' data-href="transaction.php?id=<?= $transactions[0]['id_Billetterie']; ?>&id_transaction=<?= $transaction['id']; ?>" style="cursor: pointer;">
-              <td><?= $transaction['id']; ?></td>
+              <td><a href="transaction.php?id=<?= $transactions[0]['id_Billetterie']; ?>&id_transaction=<?= $transaction['id']; ?>"><?= $transaction['id']; ?></a></td>
               <td><?= $transaction['tel']; ?></td>
               <td><?= $transaction['mail']; ?></td>
               <td><?= $transaction['nom']; ?></td>
