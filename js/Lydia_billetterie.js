@@ -170,6 +170,16 @@
           lydiaProcess.data.amount = prix
           lydiaProcess.data.order_ref = order_ref
 
+          $.ajax({
+            type: "POST",
+            url: '/admin/controleur/error_log.php',
+            data: {data: lydiaProcess},
+            dataType: "json",
+            success: function(data){
+
+            }
+          });
+
           if (prix > 0) {
             lydiaProcess.sendRequest()
           } else {
