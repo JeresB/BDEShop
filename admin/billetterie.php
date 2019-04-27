@@ -25,9 +25,6 @@ require_once("$root/admin/controleur/vendeurs.php");
         <h4 class="ui header">Billetterie<?php if ($update): ?> n° <strong><?= $billetterie['id']; ?></strong><?php endif; ?></h4>
 
         <form id="form_billetterie" class="ui form" action="controleur/traitement_gestion_billetterie.php" method="post" enctype="multipart/form-data">
-          <div class="ui message">
-            Pour une quantité infini, il faut mettre -1
-          </div>
           <div class="field">
             <label>Titre de la billetterie</label>
             <input type="text" name="nom" value="<?= ($update) ? $billetterie['nom'] : '' ?>">
