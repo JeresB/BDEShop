@@ -36,10 +36,10 @@ if (isset($order_ref) && $order_ref!= null && $order_ref != '') {
   //$mail->isSendmail();
 
   // Set who the message is to be sent from
-  $mail->setFrom('bdecosmunity@contact.fr', 'BDE Cosmunity');
+  $mail->setFrom('bde.isen.brest@gmail.com', 'BDE Cosmunity');
 
   // Set an alternative reply-to address
-  $mail->addReplyTo('bdecosmunity@contact.fr', 'BDE Cosmunity');
+  $mail->addReplyTo('bde.isen.brest@gmail.com', 'BDE Cosmunity');
 
   // Set who the message is to be sent to
   if (isset($_SESSION['mail']) && $_SESSION['mail'] != '' && $_SESSION['mail'] != null) {

@@ -44,6 +44,7 @@ if (isset($_POST) && !empty($_POST)) {
   }
 
   error_log(print_r($_POST, true));
+  error_log($activation);
 
   $gestion_bdd = new BDD_BILLETTERIES();
 
