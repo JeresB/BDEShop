@@ -95,7 +95,7 @@ require_once("$root/admin/controleur/get_promo.php");
             <select id="promo" class="ui dropdown" name="promo">
               <option value="">Promo</option>
               <?php foreach ($promos as $promo): ?>
-                <option value="<?= $promo['id'] ?>"><?= $promo['nom'] ?></option>
+                <option value="<?= $promo['nom'] ?>"><?= $promo['nom'] ?></option>
               <?php endforeach; ?>
             </select>
           </div>
