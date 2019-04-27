@@ -59,7 +59,7 @@ require_once("$root/admin/controleur/gestion_billetterie.php");
 
           <div class="field">
             <label>Photo</label>
-            <input type="hidden" name="save_photo" value="<?= $billetterie['photo'] ?>">
+            <input type="hidden" name="save_photo" value="<?= ($update) ? $billetterie['photo'] : '' ?>">
             <?php if ($update): ?>
               <img class="ui small image" src="/images/<?= $billetterie['photo'] ?>">
             <?php endif; ?>
