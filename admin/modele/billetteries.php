@@ -37,6 +37,42 @@ class BDD_BILLETTERIES {
     return $resultat['pr'];
   }
 
+  public function get_place_type($id, $type) {
+    $requete = $this->database->prepare("SELECT type FROM billetteries WHERE id = :id");
+
+    $requete->bindParam(':id', $id, PDO::PARAM_INT);
+    $requete->execute();
+
+    $resultat = $requete->fetch();
+    $types = json_decode($resultat['type']);
+
+    foreach ($types as $key => $t) {
+      if ($t->{'nom'} == $type) {
+        return $types->{$key}->{'quantite'} - $types->{$key}->{'place_prise'};
+      }
+    }
+
+    return 0;
+  }
+
+  public function get_place_horaire($id, $horaire) {
+    $requete = $this->database->prepare("SELECT horaire FROM billetteries WHERE id = :id");
+
+    $requete->bindParam(':id', $id, PDO::PARAM_INT);
+    $requete->execute();
+
+    $resultat = $requete->fetch();
+    $horaires = json_decode($resultat['horaire']);
+
+    foreach ($horaires as $key => $h) {
+      if ($h->{'nom'} == $horaire) {
+        return $horaires->{$key}->{'quantite'} - $horaires->{$key}->{'place_prise'};
+      }
+    }
+
+    return 0;
+  }
+
   public function list() {
     $requete = $this->database->prepare("SELECT id, nom, description, place_total, place_restante, photo, active FROM billetteries ORDER BY id");
 

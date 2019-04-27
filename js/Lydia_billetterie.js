@@ -163,7 +163,8 @@
         request.done(function(order_ref, textStatus, jqXHR) {
           //console.log("Requete ajax to get order ref done : " + order_ref);
           if (order_ref == 'redirection') {
-            window.location.replace("/billetterie.php");
+            alert("La place demandée n'est plus disponible, veuillez recharger la page !")
+            return
           }
 
           lydiaProcess.data.recipient = tel

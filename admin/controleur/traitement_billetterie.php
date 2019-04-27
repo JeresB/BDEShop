@@ -16,10 +16,11 @@ if (isset($_POST) && !empty($_POST)) {
   $_SESSION['mail'] = $_POST['mail'];
   $_SESSION['tel'] = $_POST['tel'];
 
-  $place = $gestion_bdd_billetterie->get_places($_POST['id_billetterie']);
+  $place_total = $gestion_bdd_billetterie->get_places($_POST['id_billetterie']);
+  $place_type = $gestion_bdd_billetterie->get_place_type($_POST['id_billetterie'], $_POST['type_place']);
+  $place_horaire = $gestion_bdd_billetterie->get_place_horaire($_POST['id_billetterie'], $_POST['horaire']);
 
-
-  if ($place > 0) {
+  if ($place_total > 0 && $place_type > 0 && $place_horaire > 0) {
     error_log("FILE : controleur/traitement_billetterie --- VAR : _POST = ".print_r($_POST, true));
 
     $resultat = $gestion_bdd_billetterie->updateQuantite($_POST['id_billetterie'], $_POST['type_place'], $_POST['horaire']);
