@@ -3,6 +3,7 @@ $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 
 require_once("$root/admin/controleur/securite.php");
 require_once("$root/admin/controleur/gestion_billetterie.php");
+require_once("$root/admin/controleur/vendeurs.php");
 
 ?>
 
@@ -53,6 +54,18 @@ require_once("$root/admin/controleur/gestion_billetterie.php");
               <label>Activation Billetterie</label>
               <input type="checkbox" tabindex="0" class="hidden" name="activation" <?php if ($update) { if ($billetterie['active']) { echo 'checked'; }} ?>>
             </div>
+          </div>
+
+          <div class="ui divider"></div>
+
+          <div class="field">
+            <label>Vendeur</label>
+            <select id="vendeur" class="ui dropdown" name="vendeur">
+              <option value="">Vendeur</option>
+              <?php foreach ($vendeurs as $vendeur): ?>
+                <option value="<?= $vendeur['token'] ?>" <?php if($update) { if($vendeur['token'] == $billetterie['token']) { echo 'selected'; }} ?>><?= $vendeur['nom'] ?></option>
+              <?php endforeach; ?>
+            </select>
           </div>
 
           <div class="ui divider"></div>

@@ -4,6 +4,7 @@ $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 require_once("$root/admin/controleur/securite.php");
 require_once("$root/admin/controleur/categories.php");
 require_once("$root/admin/controleur/promos.php");
+require_once("$root/admin/controleur/vendeurs.php");
 require_once("$root/admin/controleur/items.php");
 require_once("$root/admin/controleur/factures.php");
 require_once("$root/admin/controleur/billetteries.php");
@@ -37,6 +38,10 @@ require_once("$root/admin/controleur/billetteries.php");
               Promos
               <div class="ui blue label"><?= $nb_promos['nb'] ?></div>
             </a>
+            <a id="link_vendeurs" class="active item link_admin_menu" data="vendeurs">
+              Vendeurs
+              <div class="ui blue label"><?= $nb_vendeurs['nb'] ?></div>
+            </a>
             <a id="link_items" class="item link_admin_menu" data="items">
               Items
               <div class="ui blue label"><?= $nb_item['nb'] ?></div>
@@ -57,7 +62,7 @@ require_once("$root/admin/controleur/billetteries.php");
         <div class="twelve wide computer sixteen wide mobile column">
           <div id="categories" class="ui grid main_content">
             <?php foreach ($categories as $categorie): ?>
-              <div class="four wide computer eight wide tablet sixteen wide mobilecolumn">
+              <div class="four wide computer eight wide tablet sixteen wide mobile column">
                 <div class="ui card">
                   <div class="content">
                     <div class="header"><span><?= $categorie['nom'] ?></span><span class="ui right floated trashbutton" data="<?= $categorie['id'] ?>"><i class="trash alternate red icon"></i></span></div>
@@ -86,7 +91,7 @@ require_once("$root/admin/controleur/billetteries.php");
           </div>
           <div id="promos" class="ui grid main_content"  style="display: none;">
             <?php foreach ($promos as $promo): ?>
-              <div class="four wide computer eight wide tablet sixteen wide mobilecolumn">
+              <div class="four wide computer eight wide tablet sixteen wide mobile column">
                 <div class="ui card">
                   <div class="content">
                     <div class="header"><span><?= $promo['nom'] ?></span><span class="ui right floated trashpromo" data="<?= $promo['id'] ?>"><i class="trash alternate red icon"></i></span></div>
@@ -105,6 +110,38 @@ require_once("$root/admin/controleur/billetteries.php");
                         </div>
                         <div class="four wide field">
                           <div class="ui submit primary button addpromo"><i class="plus icon"></i></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="vendeurs" class="ui grid main_content"  style="display: none;">
+            <?php foreach ($vendeurs as $vendeur): ?>
+              <div class="four wide computer eight wide tablet sixteen wide mobile column">
+                <div class="ui card">
+                  <div class="content">
+                    <div class="header"><span><?= $vendeur['nom'].' : '.$vendeur['token'] ?></span><span class="ui right floated trashvendeurs" data="<?= $vendeur['id'] ?>"><i class="trash alternate red icon"></i></span></div>
+                  </div>
+                </div>
+              </div>
+            <?php endforeach; ?>
+            <div class="sixteen wide column">
+              <div class="">
+                <div class="content">
+                  <div class="center aligned header">
+                    <div class="ui form">
+                      <div class="inline fields">
+                        <div class="six wide field">
+                          <input id="new_nom_vendeur" type="text" placeholder="Nom du vendeurs">
+                        </div>
+                        <div class="six wide field">
+                          <input id="new_token_vendeur" type="text" placeholder="Token du vendeurs">
+                        </div>
+                        <div class="four wide field">
+                          <div class="ui submit primary button addvendeurs"><i class="plus icon"></i></div>
                         </div>
                       </div>
                     </div>
@@ -297,6 +334,28 @@ require_once("$root/admin/controleur/billetteries.php");
             type: "POST",
             url: 'controleur/add_promo.php',
             data: {nom: $("#newpromo").val()},
+            success: function(data){
+              location.reload();
+            }
+          });
+        });
+
+        $(".trashvendeurs").click(function() {
+          $.ajax({
+            type: "POST",
+            url: 'controleur/delete_vendeur.php',
+            data: {id: $(this).attr('data')},
+            success: function(data){
+              location.reload();
+            }
+          });
+        });
+
+        $(".addvendeurs").click(function() {
+          $.ajax({
+            type: "POST",
+            url: 'controleur/add_vendeur.php',
+            data: {nom: $("#new_nom_vendeur").val(), token: $("#new_token_vendeur").val()},
             success: function(data){
               location.reload();
             }
