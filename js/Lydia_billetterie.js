@@ -96,7 +96,7 @@
 
     $(this).click(function() {
       if (lock) {
-        $("#lock_message").html("Vous avez déjà appuyé sur le bouton.");
+        $("#lock_message").html('<div class="ui hidden divider"></div><div class="ui message">Vous avez déjà appuyé sur le bouton.<br>Si le bouton lydia ne vous renvoie pas vers le site lydia vérifié bien vos informations.<br>Téléphone : '+lydiaProcess.data.recipient+'</div>');
         return
       }
       lock = true
