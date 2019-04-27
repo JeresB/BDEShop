@@ -34,6 +34,20 @@ function setFormPeople() {
   });
 }
 
+function get_places() {
+  $.ajax({
+    type: "get",
+    url: "/admin/controleur/get_places.php",
+    data: {id: $("#id_billetterie").val()},
+    dataType: "json",
+    success: function(data) {
+      $('#place_disponible').html('Places disponible : ' + data.place_restante)
+
+      setTimeout(function(){ get_places() }, 1000)
+    }
+  })
+}
+
 function gestion_promo() {
   $("#code_promo").change(function() {
     $.ajax({

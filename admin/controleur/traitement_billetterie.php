@@ -16,17 +16,25 @@ if (isset($_POST) && !empty($_POST)) {
   $_SESSION['mail'] = $_POST['mail'];
   $_SESSION['tel'] = $_POST['tel'];
 
-  error_log("FILE : controleur/traitement_billetterie --- VAR : _POST = ".print_r($_POST, true));
+  $place = $gestion_bdd_billetterie->get_places($_POST['id_billetterie']);
 
-  $resultat = $gestion_bdd_billetterie->updateQuantite($_POST['id_billetterie'], $_POST['type_place'], $_POST['horaire']);
 
-  if ($_POST['code_promo'] != '') {
-    error_log("updateQuantiteCodePromo called");
-    $resultat = $gestion_bdd_billetterie->updateQuantiteCodePromo($_POST['id_billetterie'], $_POST['code_promo']);
+  if ($place > 0) {
+    error_log("FILE : controleur/traitement_billetterie --- VAR : _POST = ".print_r($_POST, true));
+
+    $resultat = $gestion_bdd_billetterie->updateQuantite($_POST['id_billetterie'], $_POST['type_place'], $_POST['horaire']);
+
+    if ($_POST['code_promo'] != '') {
+      error_log("updateQuantiteCodePromo called");
+      $resultat = $gestion_bdd_billetterie->updateQuantiteCodePromo($_POST['id_billetterie'], $_POST['code_promo']);
+    }
+    $order_ref = $gestion_bdd_transaction->add($_POST['mail'], $_POST['tel'], $_POST['type_place'], $_POST['horaire'], $_POST['nom'], $_POST['prenom'], $_POST['promo'], $_POST['code_promo'], $_POST['infos_utile'], $_POST['id_billetterie']);
+
+    echo $order_ref;
+  } else {
+    echo 'redirection';
   }
-  $order_ref = $gestion_bdd_transaction->add($_POST['mail'], $_POST['tel'], $_POST['type_place'], $_POST['horaire'], $_POST['nom'], $_POST['prenom'], $_POST['promo'], $_POST['code_promo'], $_POST['infos_utile'], $_POST['id_billetterie']);
 
-  echo $order_ref;
 }
 
 echo '';

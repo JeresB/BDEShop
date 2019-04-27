@@ -7,7 +7,7 @@ require_once("$root/admin/modele/billetteries.php");
 
 if (isset($_POST) && !empty($_POST)) {
 
-  error_log(print_r($_POST, true));
+  error_log("FILE TRAITEMENT GESTION TRANSACTION ".print_r($_POST, true));
 
   $gestion_bdd_t = new BDD_TRANSACTIONS();
   $gestion_bdd_b = new BDD_BILLETTERIES();

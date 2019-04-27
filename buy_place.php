@@ -29,7 +29,7 @@ require_once("$root/admin/controleur/get_promo.php");
 
         <form id="formulaire_billetterie" class="ui form centered_block">
 
-          <div class="ui message">
+          <div id="place_disponible" class="ui message">
             Place disponible : <?= $billetterie['place_restante']; ?>
           </div>
 
@@ -133,11 +133,13 @@ require_once("$root/admin/controleur/get_promo.php");
           </div>
 
           <div id="message_prix"></div>
+          <div id="lock_message"></div>
 
           <div class="ui divider"></div>
 
           <img  id="payer" src="/images/paymentbutton.png" style="max-width: 100%!important; cursor: pointer;">
 
+          <input id="lock" type="hidden" value="false">
         </form>
       </div>
     </div>
@@ -149,8 +151,8 @@ require_once("$root/admin/controleur/get_promo.php");
     <script type="text/javascript">
       $(document).ready(function() {
         $('select.dropdown').dropdown();
-
         gestion_promo()
+        get_places()
 
         $("#type_place").change(function() {
           gestion_prix()

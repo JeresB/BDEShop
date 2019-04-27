@@ -26,6 +26,17 @@ class BDD_BILLETTERIES {
     return $resultat;
   }
 
+  public function get_places($id) {
+    $requete = $this->database->prepare("SELECT place_restante as pr FROM billetteries WHERE id = :id");
+
+    $requete->bindParam(':id', $id, PDO::PARAM_INT);
+    $requete->execute();
+
+    $resultat = $requete->fetch();
+
+    return $resultat['pr'];
+  }
+
   public function list() {
     $requete = $this->database->prepare("SELECT id, nom, description, place_total, place_restante, photo, active FROM billetteries ORDER BY id");
 

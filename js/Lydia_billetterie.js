@@ -74,6 +74,8 @@
   }
 
   $.fn.payWithLYDIA = function(data) {
+    var lock =  false;
+
     var lydiaProcess = new LYDIAProcess()
 
     for (var i = 0; i < lydiaProcess.configKey.length; i++) {
@@ -93,6 +95,11 @@
     }
 
     $(this).click(function() {
+      if (lock) {
+        $("#lock_message").html("Vous avez déjà appuyé sur le bouton.");
+        return
+      }
+      lock = true
 
       var prix = $('#prix').val()
 
@@ -155,6 +162,10 @@
 
         request.done(function(order_ref, textStatus, jqXHR) {
           //console.log("Requete ajax to get order ref done : " + order_ref);
+          if (order_ref == 'redirection') {
+            window.location.replace("/billetterie.php");
+          }
+
           lydiaProcess.data.recipient = tel
           lydiaProcess.data.amount = prix
           lydiaProcess.data.order_ref = order_ref
@@ -173,6 +184,8 @@
             });
           }
         });
+      } else {
+        lock = false;
       }
     })
   }
