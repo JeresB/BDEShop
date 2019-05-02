@@ -74,7 +74,7 @@ class BDD_BILLETTERIES {
   }
 
   public function list() {
-    $requete = $this->database->prepare("SELECT id, nom, description, place_total, place_restante, photo, active FROM billetteries ORDER BY id");
+    $requete = $this->database->prepare("SELECT id, nom, description, place_total, place_restante, photo, active FROM billetteries ORDER BY id DESC");
 
     $requete->execute();
 
