@@ -171,9 +171,9 @@ if (!$billetterie['active'] && !$_SESSION['admin']) {
           currency: 'EUR',
           type: 'phone',
           // The client will be redirect to this URL after the payment
-          browser_success_url : "http://bde.digital-design.ovh/success.php",
+          browser_success_url : "http://bdetest.jeres.fr/success.php",
           // This URL will be called by our server after the payment so you can update the order on your database
-          confirm_url : "http://bde.digital-design.ovh/admin/controleur/success_billetterie.php"
+          confirm_url : "http://bdetest.jeres.fr/success_billetterie.php"
         });
       });
     </script>
