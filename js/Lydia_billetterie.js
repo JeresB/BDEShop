@@ -185,13 +185,13 @@
             lydiaProcess.sendRequest()
           } else {
             $.ajax({
-              url: "http://bde.digital-design.ovh/admin/controleur/success_billetterie.php",
+              url: "/admin/controleur/success_billetterie.php",
 							type: 'POST',
 							data: {
 								order_ref: order_ref
 							}
 						}).done(function() {
-              window.location.href = "http://bde.digital-design.ovh/success.php";
+              window.location.href = "/success.php";
             });
           }
         });
