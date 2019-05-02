@@ -110,7 +110,7 @@ require_once("$root/admin/controleur/transactions.php");
           $.ajax({
             type: "POST",
             url: 'controleur/delete_transaction.php',
-            data: {id: $("#id_transaction").val()},
+            data: {id: $(this).attr('data')},
             success: function(data){
               window.location.reload();
             }
