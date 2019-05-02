@@ -41,11 +41,8 @@ require_once("$root/admin/controleur/get_promo.php");
               <?php foreach ($types as $type): ?>
                 <?php
                   $quantite = ($type->{'quantite'} - $type->{'place_prise'});
-                  if ($quantite == -1) {
-                    //$quantite = 'Limite';
-                  }
                 ?>
-                <option id="<?php echo str_replace(' ','',trim($type->{'nom'})); ?>" value="<?= $type->{'nom'} ?>" <?= ($quantite <= 0 && $quantite !== -1) ? 'disabled' : ''; ?> prix="<?= $type->{'prix'} ?>"><?= $type->{'nom'} ?> / Prix : <?= $type->{'prix'} ?> / Quantité restante : <?= $quantite ?></option>
+                <option id="<?php echo str_replace(' ','',trim($type->{'nom'})); ?>" value="<?= $type->{'nom'} ?>" <?= ($quantite <= 0) ? 'disabled' : ''; ?> prix="<?= $type->{'prix'} ?>"><?= $type->{'nom'} ?> / Prix : <?= $type->{'prix'} ?> / Quantité restante : <?= $quantite ?></option>
               <?php endforeach; ?>
             </select>
           </div>
@@ -57,11 +54,8 @@ require_once("$root/admin/controleur/get_promo.php");
               <?php foreach ($horaires as $horaire): ?>
                 <?php
                   $quantite = ($horaire->{'quantite'} - $horaire->{'place_prise'});
-                  if ($quantite == -1) {
-                    //$quantite = 0;
-                  }
                 ?>
-                <option value="<?= $horaire->{'nom'} ?>" <?= ($quantite <= 0 && $quantite !== -1) ? 'disabled' : ''; ?>><?= $horaire->{'nom'} ?> / Quantité restante : <?= $quantite ?></option>
+                <option value="<?= $horaire->{'nom'} ?>" <?= ($quantite <= 0) ? 'disabled' : ''; ?>><?= $horaire->{'nom'} ?> / Quantité restante : <?= $quantite ?></option>
               <?php endforeach; ?>
             </select>
           </div>

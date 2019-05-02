@@ -138,7 +138,7 @@ require_once("$root/admin/controleur/get_promo.php");
             url: 'controleur/delete_transaction.php',
             data: {id: $("#id_transaction").val()},
             success: function(data){
-              window.location.replace("/admin/admin.php");
+              window.location.replace("/admin/transactions.php");
             }
           });
         });

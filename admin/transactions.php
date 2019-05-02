@@ -54,6 +54,7 @@ require_once("$root/admin/controleur/transactions.php");
             <th>Infos utile</th>
             <th>Status</th>
             <th>Date</th>
+            <th>Supprimer</th>
           </tr>
         </thead>
         <tbody>
@@ -71,6 +72,7 @@ require_once("$root/admin/controleur/transactions.php");
               <td><?= $transaction['infos_utile']; ?></td>
               <td><?= $transaction['status']; ?></td>
               <td><?= $transaction['date_creation']; ?></td>
+              <td><button class="ui red button supprtransaction" type="button" data="<?= $transaction['id'] ?>"><i class="trash alternate icon"></i></button></td>
             </tr>
           <?php endforeach; ?>
         </tbody>
@@ -88,6 +90,7 @@ require_once("$root/admin/controleur/transactions.php");
             <th>Infos utile</th>
             <th>Status</th>
             <th>Date</th>
+            <th>Supprimer</th>
           </tr>
         </tfoot>
       </table>
@@ -101,6 +104,17 @@ require_once("$root/admin/controleur/transactions.php");
       jQuery(document).ready(function($) {
         $(".clickable-row").click(function() {
             window.location = $(this).data("href");
+        });
+
+        $(".supprtransaction").click(function() {
+          $.ajax({
+            type: "POST",
+            url: 'controleur/delete_transaction.php',
+            data: {id: $("#id_transaction").val()},
+            success: function(data){
+              window.location.reload();
+            }
+          });
         });
       });
       $('.datatables').DataTable( {
