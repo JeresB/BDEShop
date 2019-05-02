@@ -24,7 +24,7 @@ require_once("$root/admin/controleur/billetteries.php");
         <div class="ui hidden divider"></div>
         <div class="ui three stackable cards">
           <?php foreach ($billetteries as $billetterie): ?>
-            <?php if ($billetterie['active'] && $billetterie['place_restante'] > 0): ?>
+            <?php if ($billetterie['active'] && $billetterie['place_restante'] > 0 || $_SESSION['admin']): ?>
               <div class="ui card">
                 <div class="image">
                   <img src="/images/<?= $billetterie['photo']; ?>" style="padding-bottom: 10px;">
