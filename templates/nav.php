@@ -18,7 +18,7 @@
           if(!isset($_SESSION)) {
             session_start();
           }
-          if ($_SESSION['admin']) {
+          if (array_key_exists("admin", $_SESSION) && $_SESSION['admin']) {
             echo '<a class="item" href="/admin/admin.php">
               Accueil Admin
             </a>';

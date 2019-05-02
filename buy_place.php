@@ -3,6 +3,14 @@ $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 
 require_once("$root/admin/controleur/get_billetterie.php");
 require_once("$root/admin/controleur/get_promo.php");
+
+if(!isset($_SESSION)) {
+  session_start();
+}
+
+if (!$billetterie['active'] && !$_SESSION['admin']) {
+  header('Location: index.php');
+}
 ?>
 
 <!doctype html>
