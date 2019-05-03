@@ -72,6 +72,18 @@ class BDD_TRANSACTIONS {
     return $resultat;
   }
 
+  public function getDataForEmail($id) {
+    $requete = $this->database->prepare("SELECT transaction_billetterie.id, transaction_billetterie.place, transaction_billetterie.horaire, transaction_billetterie.date_creation, billetteries.nom FROM transaction_billetterie, billetteries WHERE transaction_billetterie.id_Billetterie = billetteries.id AND transaction_billetterie.id = :id");
+
+    $requete->bindParam(':id', $id, PDO::PARAM_INT);
+
+    $requete->execute();
+
+    $resultat = $requete->fetch();
+
+    return $resultat;
+  }
+
   public function delete($id) {
     $requete = $this->database->prepare("DELETE FROM transaction_billetterie WHERE id = :id");
     $requete->bindParam(':id', $id, PDO::PARAM_INT);

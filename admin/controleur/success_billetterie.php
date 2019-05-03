@@ -18,6 +18,7 @@ $order_ref = $_POST['order_ref'];
 if (isset($order_ref) && $order_ref!= null && $order_ref != '') {
   $gestion_bdd = new BDD_TRANSACTIONS();
   $gestion_bdd->updateStatus($order_ref, 'Payé par Lydia');
+  $order = $gestion_bdd->getDataForEmail($order_ref);
 
   // Import PHPMailer classes into the global namespace
   // These must be at the top of your script, not inside a function
@@ -53,6 +54,12 @@ if (isset($order_ref) && $order_ref!= null && $order_ref != '') {
   // Read an HTML message body from an external file, convert referenced images to embedded,
   // convert HTML into a basic plain-text alternative body
   $mail->msgHTML("<h1>Facture Billetterie BDE ISEN</h1><p>Votre commande dans la billetterie du BDE ISEN a bien été prise en compte.</p>
+  <p>Récapitulatif : <br /><ul>
+  <li>Numéro de transaction : <?= $order['id']; ?></li>
+  <li>Place : <?= $order['place']; ?></li>
+  <li>Horaire : <?= $order['horaire']; ?></li>
+  <li>Nom de l'événement : <?= $order['nom']; ?></li>
+  </ul></p>
   <p>Le BDE ISEN va maintenant s'occuper de votre commande et vous tiendra informé</p>");
 
   // Replace the plain text body with one created manually
