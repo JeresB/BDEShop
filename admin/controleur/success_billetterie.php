@@ -54,16 +54,11 @@ if (isset($order_ref) && $order_ref!= null && $order_ref != '') {
   // Read an HTML message body from an external file, convert referenced images to embedded,
   // convert HTML into a basic plain-text alternative body
   $mail->msgHTML("<h1>Facture Billetterie BDE ISEN</h1><p>Votre commande dans la billetterie du BDE ISEN a bien été prise en compte.</p>
-  <p>Récapitulatif : <br /><ul>
-  <li>Numéro de transaction : <?= $order['id']; ?></li>
-  <li>Place : <?= $order['place']; ?></li>
-  <li>Horaire : <?= $order['horaire']; ?></li>
-  <li>Nom de l'événement : <?= $order['nom']; ?></li>
-  </ul></p>
   <p>Le BDE ISEN va maintenant s'occuper de votre commande et vous tiendra informé</p>");
 
   // Replace the plain text body with one created manually
-  $mail->AltBody = 'Votre commande dans la billetterie du BDE ISEN a bien été prise en compte. Le BDE ISEN va maintenant s\'occuper de votre commande et vous tiendra informé';
+  $mail->AltBody = 'Votre commande dans la billetterie du BDE ISEN a bien été prise en compte.
+  Le BDE ISEN va maintenant s\'occuper de votre commande et vous tiendra informé';
 
   // send the message, check for errors
   if (!$mail->send()) {
