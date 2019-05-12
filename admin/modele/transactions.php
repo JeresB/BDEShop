@@ -84,7 +84,49 @@ class BDD_TRANSACTIONS {
     return $resultat;
   }
 
-  public function delete($id) {
+  public function delete($id, $id_billetterie) {
+    error_log("SUPPRESSION TRANSACTION");
+    error_log($id);
+    error_log($id_billetterie);
+    // Partie 1 : On recupere les données de la transaction
+    $requete = $this->database->prepare("SELECT * FROM transaction_billetterie WHERE id = :id");
+    $requete->bindParam(':id', $id, PDO::PARAM_INT);
+    $requete->execute();
+    $transaction = $requete->fetch();
+
+    $requete = $this->database->prepare("SELECT * FROM billetteries WHERE id = :id");
+    $requete->bindParam(':id', $id_billetterie, PDO::PARAM_INT);
+    $requete->execute();
+    $billetterie = $requete->fetch();
+
+    $types = json_decode($billetterie['type']);
+    $horaires = json_decode($billetterie['horaire']);
+
+    foreach ($types as $key => $t) {
+      if ($t->{'nom'} == $transaction['place']) {
+        $types->{$key}->{'place_prise'} -= 1;
+      }
+    }
+
+    foreach ($horaires as $key => $h) {
+      if ($h->{'nom'} == $transaction['horaire']) {
+        $horaires->{$key}->{'place_prise'} -= 1;
+      }
+    }
+
+    $types = json_encode($types);
+    $horaires = json_encode($horaires);
+
+    $requete = $this->database->prepare("UPDATE billetteries
+                                         SET place_restante	= place_restante + 1, type = :type, horaire = :horaire
+                                         WHERE id = :id");
+
+    $requete->bindParam(':id', $id_billetterie, PDO::PARAM_INT);
+    $requete->bindParam(':type', $types);
+    $requete->bindParam(':horaire', $horaires);
+
+    $resultat = $requete->execute();
+
     $requete = $this->database->prepare("DELETE FROM transaction_billetterie WHERE id = :id");
     $requete->bindParam(':id', $id, PDO::PARAM_INT);
 

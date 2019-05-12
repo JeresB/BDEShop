@@ -10,5 +10,6 @@
   <meta name="keywords" content="">
 
   <link rel="stylesheet" type="text/css" href="semantic/semantic.min.css" />
+  <link rel="stylesheet" type="text/css" href="css/Semantic-UI-Alert.css">
   <link rel="stylesheet" type="text/css" href="css/global.css">
 </head>

@@ -102,3 +102,79 @@ function gestion_prix() {
 
   $("#message_prix").html(text)
 }
+
+$("#createTransacAdmin").click(function(event) {
+  event.preventDefault();
+  $(this).attr("disabled", true);
+
+  var type_place = $('#type_place').val()
+  var horaire = $('#horaire').val()
+  var nom = $("#nom").val()
+  var prenom = $("#prenom").val()
+  var promo = $("#promo").val()
+  var code_promo = $("#code_promo").val()
+  var infos_utile = $.trim($("#infos_utile").val())
+  var id_billetterie = $("#id_billetterie").val()
+
+  //console.log("Horaire = " + horaire);
+  //console.log("Place = " + type_place);
+
+  if (horaire == '' || type_place == '') {
+    $.uiAlert({
+      textHead: 'Erreur',
+      text: 'Pour enregistrer une place, veuillez choisir un type de place et un horaire de navette',
+      bgcolor: '#DF0101',
+      textcolor: '#fff',
+      position: 'top-right',
+      icon: 'close box',
+      time: 3,
+    })
+
+    $(this).attr("disabled", false);
+    return;
+  }
+
+  request = $.ajax({
+    type: 'POST',
+    url: 'admin/controleur/traitement_billetterie.php',
+    data: {
+      mail: 'BDE',
+      tel: 'BDE',
+      type_place: type_place,
+      horaire: horaire,
+      nom: nom,
+      prenom: prenom,
+      promo: promo,
+      code_promo: code_promo,
+      infos_utile: infos_utile,
+      id_billetterie: id_billetterie
+    }
+  });
+
+  request.done(function(order_ref, textStatus, jqXHR) {
+    if (order_ref == 'redirection') {
+      alert("La place demandée n'est plus disponible, veuillez recharger la page !")
+      return
+    }
+
+    $.ajax({
+      url: "/admin/controleur/success_billetterie.php",
+      type: 'POST',
+      data: {
+        order_ref: order_ref
+      }
+    }).done(function() {
+      $.uiAlert({
+        textHead: 'Enregistrement',
+        text: 'La place a bien été enregistrée. Type : ' + type_place + ' & Horaire : ' + horaire,
+        bgcolor: '#01DF01',
+        textcolor: '#fff',
+        position: 'top-right',
+        icon: 'checkmark box',
+        time: 3,
+      })
+    });
+  });
+
+  $(this).attr("disabled", false);
+})

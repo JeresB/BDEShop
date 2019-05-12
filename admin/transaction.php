@@ -136,9 +136,9 @@ require_once("$root/admin/controleur/get_promo.php");
           $.ajax({
             type: "POST",
             url: 'controleur/delete_transaction.php',
-            data: {id: $("#id_transaction").val()},
+            data: {id: $("#id_transaction").val(), billetterie: $("#id_billetterie").val()},
             success: function(data){
-              window.location.replace("/admin/transactions.php");
+              history.back();
             }
           });
         });

@@ -68,6 +68,14 @@ if (!$billetterie['active'] && !$_SESSION['admin']) {
             </select>
           </div>
 
+          <?php if ($_SESSION['admin']): ?>
+            <div class="ui divider"></div>
+            <button id="createTransacAdmin" class="ui basic fluid blue button">
+              Enregistrer la place en tant que BDE Administrateur
+            </button>
+            <div class="ui divider"></div>
+          <?php endif; ?>
+
           <div id="field_mail" class="field">
             <label>Mail</label>
             <input id="mail" type="text" name="mail">
@@ -148,6 +156,7 @@ if (!$billetterie['active'] && !$_SESSION['admin']) {
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="semantic/semantic.min.js"></script>
+    <script type="text/javascript" src="js/Semantic-UI-Alert.js"></script>
     <script type="text/javascript" src="js/buy_place.js"></script>
     <script type="text/javascript" src="js/Lydia_billetterie.js"></script>
     <script type="text/javascript">

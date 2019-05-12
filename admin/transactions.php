@@ -29,6 +29,7 @@ require_once("$root/admin/controleur/transactions.php");
             Exporter les transactions au format CSV
           </a>
         <?php else: ?>
+          <input id="valueIdBilletterie" type="hidden" value="<?= $transactions[0]['id_Billetterie']; ?>">
           Transactions pour la billetterie n° <strong><?= $transactions[0]['id_Billetterie']; ?></strong>
           <a class="ui basic blue button" href="transactions.php">Toutes les transactions</a>
           <a class="ui basic button" href="/admin/controleur/exportTransactions.php?id=<?= $transactions[0]['id_Billetterie']; ?>">
@@ -39,7 +40,7 @@ require_once("$root/admin/controleur/transactions.php");
 
       <div class="ui hidden divider"></div>
 
-      <table class="ui selectable celled table datatables" style="width:100%">
+      <table id="tableTransaction" class="ui selectable celled table datatables" style="width:100%">
         <thead>
           <tr>
             <th>Transaction n°</th>
@@ -106,11 +107,11 @@ require_once("$root/admin/controleur/transactions.php");
             window.location = $(this).data("href");
         });
 
-        $(".supprtransaction").click(function() {
+        $("#tableTransaction").on( "click", ".supprtransaction", function(e) {
           $.ajax({
             type: "POST",
             url: 'controleur/delete_transaction.php',
-            data: {id: $(this).attr('data')},
+            data: {id: $(this).attr('data'), billetterie: $("#valueIdBilletterie").val()},
             success: function(data){
               window.location.reload();
             }
