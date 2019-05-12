@@ -55,7 +55,7 @@ require_once("$root/admin/controleur/get_promo.php");
               <select id="promo" class="ui dropdown" name="promo" value="<?= $transaction['promo']; ?>">
                 <option value="">Promo</option>
                 <?php foreach ($promos as $promo): ?>
-                  <option value="<?= $promo['id'] ?>" <?php if($promo['id'] == $transaction['promo']) echo 'selected'; ?>><?= $promo['nom'] ?></option>
+                  <option value="<?= $promo['nom'] ?>" <?php if($promo['nom'] == $transaction['promo']) echo 'selected'; ?>><?= $promo['nom'] ?></option>
                 <?php endforeach; ?>
               </select>
             </div>

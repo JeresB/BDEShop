@@ -23,7 +23,7 @@ if (isset($_POST) && !empty($_POST)) {
   $success = $gestion_bdd_t->update($_POST['id'], $_POST['tel'], $_POST['mail'], $_POST['nom'], $_POST['prenom'], $_POST['promo'], $_POST['type_place'], $_POST['horaire'], $_POST['code_promo'], $_POST['infos_utile'], $_POST['status']);
 
   echo '<script type="text/javascript">
-          window.location.replace("/admin/transactions.php");
+          window.location.replace("/admin/transactions.php?id='.$_POST['id_billetterie'].'");
         </script>';
 
 } else {
