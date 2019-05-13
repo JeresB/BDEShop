@@ -39,7 +39,7 @@ class BDD_TRANSACTIONS {
   }
 
   public function listAll() {
-    $requete = $this->database->prepare("SELECT * FROM transaction_billetterie ORDER BY id");
+    $requete = $this->database->prepare("SELECT * FROM transaction_billetterie ORDER BY id DESC");
 
     $requete->execute();
 
@@ -49,7 +49,7 @@ class BDD_TRANSACTIONS {
   }
 
   public function list($id_billetterie) {
-    $requete = $this->database->prepare("SELECT * FROM transaction_billetterie WHERE id_Billetterie = :id ORDER BY id");
+    $requete = $this->database->prepare("SELECT * FROM transaction_billetterie WHERE id_Billetterie = :id ORDER BY id DESC");
 
     $requete->bindParam(':id', $id_billetterie, PDO::PARAM_INT);
 
