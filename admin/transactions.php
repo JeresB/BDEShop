@@ -119,6 +119,7 @@ require_once("$root/admin/controleur/transactions.php");
         });
       });
       $('.datatables').DataTable( {
+        order: [[ 0, "desc" ]],
         language: {
           processing:     "Traitement en cours...",
           search:         "Rechercher&nbsp;:",
