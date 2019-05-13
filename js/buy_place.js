@@ -48,6 +48,65 @@ function get_places() {
   })
 }
 
+function get_types_place() {
+  $.ajax({
+    type: "get",
+    url: "/admin/controleur/get_types_place.php",
+    data: {id: $("#id_billetterie").val()},
+    dataType: "json",
+    success: function(data) {
+      //console.log(JSON.stringify(data));
+      //console.log(data[0])
+      $("#show_type_place").html('')
+
+      $.each(data, function( index, value ) {
+        var quantite = (value.quantite - value.place_prise)
+        var id = value.nom.trim().replace(/ /g,"");
+
+        if (quantite <= 0) {
+          $("#" + id).prop('disabled' , true)
+
+          $("#show_type_place").append('<p class="red text">' + value.nom + ' / Prix : ' + value.prix + ' / Quantité restante : ' + quantite + '<p>')
+        } else {
+          $("#show_type_place").append('<p class="green text">' + value.nom + ' / Prix : ' + value.prix + ' / Quantité restante : ' + quantite + '<p>')
+        }
+      });
+
+      setTimeout(function(){ get_types_place() }, 1000)
+    }
+  })
+}
+
+function get_horaire() {
+  $.ajax({
+    type: "get",
+    url: "/admin/controleur/get_horaires.php",
+    data: {id: $("#id_billetterie").val()},
+    dataType: "json",
+    success: function(data) {
+      //console.log(JSON.stringify(data));
+      //console.log(data[0])
+      $("#show_horaire").html('')
+
+      $.each(data, function( index, value ) {
+        var quantite = (value.quantite - value.place_prise)
+        var id = value.nom.trim().replace(/ /g,"");
+
+        if (quantite <= 0) {
+
+          $("#" + id).prop('disabled' , true)
+
+          $("#show_horaire").append('<p class="red text">' + value.nom + ' / Quantité restante : ' + quantite + '<p>')
+        } else {
+          $("#show_horaire").append('<p class="green text">' + value.nom + ' / Quantité restante : ' + quantite + '<p>')
+        }
+      });
+
+      setTimeout(function(){ get_horaire() }, 1000)
+    }
+  })
+}
+
 function gestion_promo() {
   $("#code_promo").change(function() {
     $.ajax({
@@ -116,8 +175,8 @@ $("#createTransacAdmin").click(function(event) {
   var infos_utile = $.trim($("#infos_utile").val())
   var id_billetterie = $("#id_billetterie").val()
 
-  //console.log("Horaire = " + horaire);
-  //console.log("Place = " + type_place);
+  console.log("Horaire = " + horaire);
+  console.log("Place = " + type_place);
 
   if (horaire == '' || type_place == '') {
     $.uiAlert({
