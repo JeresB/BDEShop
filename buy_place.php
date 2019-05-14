@@ -181,7 +181,7 @@ if (!$billetterie['active'] && !$_SESSION['admin']) {
         //$('select.dropdown').dropdown();
         gestion_promo()
         get_places()
-        get_types_place()
+        //get_types_place()
         get_horaire()
 
         $("#checkbox_paye").change(function() {

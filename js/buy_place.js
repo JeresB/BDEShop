@@ -35,6 +35,7 @@ function setFormPeople() {
 }
 
 function get_places() {
+  var place_restante = 9999999999
   $.ajax({
     type: "get",
     url: "/admin/controleur/get_places.php",
@@ -42,37 +43,38 @@ function get_places() {
     dataType: "json",
     success: function(data) {
       $('#place_disponible').html('Places disponible : ' + data.place_restante)
+      place_restante = data.place_restante
+
+      $.ajax({
+        type: "get",
+        url: "/admin/controleur/get_types_place.php",
+        data: {id: $("#id_billetterie").val()},
+        dataType: "json",
+        success: function(data) {
+          //console.log(JSON.stringify(data));
+          //console.log(data[0])
+          $("#show_type_place").html('')
+
+          $.each(data, function( index, value ) {
+            var quantite = (value.quantite - value.place_prise)
+            var id = value.nom.trim().replace(/ /g,"");
+
+            if (quantite <= 0) {
+              $("#" + id).prop('disabled' , true)
+
+              $("#show_type_place").append('<p class="red text">' + value.nom + ' / Prix : ' + value.prix + ' / Quantité restante : ' + quantite + '<p>')
+            } else {
+              if (quantite > place_restante) {
+                quantite = place_restante
+              }
+              //console.log("Quantite = " + quantite + " & place_restante = " + place_restante);
+              $("#show_type_place").append('<p class="green text">' + value.nom + ' / Prix : ' + value.prix + ' / Quantité restante : ' + quantite + '<p>')
+            }
+          });
+        }
+      })
 
       setTimeout(function(){ get_places() }, 1000)
-    }
-  })
-}
-
-function get_types_place() {
-  $.ajax({
-    type: "get",
-    url: "/admin/controleur/get_types_place.php",
-    data: {id: $("#id_billetterie").val()},
-    dataType: "json",
-    success: function(data) {
-      //console.log(JSON.stringify(data));
-      //console.log(data[0])
-      $("#show_type_place").html('')
-
-      $.each(data, function( index, value ) {
-        var quantite = (value.quantite - value.place_prise)
-        var id = value.nom.trim().replace(/ /g,"");
-
-        if (quantite <= 0) {
-          $("#" + id).prop('disabled' , true)
-
-          $("#show_type_place").append('<p class="red text">' + value.nom + ' / Prix : ' + value.prix + ' / Quantité restante : ' + quantite + '<p>')
-        } else {
-          $("#show_type_place").append('<p class="green text">' + value.nom + ' / Prix : ' + value.prix + ' / Quantité restante : ' + quantite + '<p>')
-        }
-      });
-
-      setTimeout(function(){ get_types_place() }, 1000)
     }
   })
 }
