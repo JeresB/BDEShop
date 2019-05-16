@@ -34,9 +34,10 @@ if(!empty($transactions) && $transactions != null){
   fseek($f, 0);
 
   //set headers to download file rather than displayed
+  header('Content-Encoding: UTF-8');
   header('Content-type: text/csv; charset=UTF-8');
   header('Content-Disposition: attachment; filename="' . $filename . '";');
-
+  echo "\xEF\xBB\xBF"; // UTF-8 BOM
   //output all remaining data on a file pointer
   fpassthru($f);
 }
